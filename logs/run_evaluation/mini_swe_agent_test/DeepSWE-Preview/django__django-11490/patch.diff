@@ -1,0 +1,71 @@
+diff --git a/django/db/models/sql/compiler.py b/django/db/models/sql/compiler.py
+index a44adfc760..347baf3d64 100644
+--- a/django/db/models/sql/compiler.py
++++ b/django/db/models/sql/compiler.py
+@@ -425,7 +425,7 @@ class SQLCompiler:
+                 # If the columns list is limited, then all combined queries
+                 # must have the same columns list. Set the selects defined on
+                 # the query on all combined queries, if not already set.
+-                if not compiler.query.values_select and self.query.values_select:
++                if self.query.values_select:
+                     compiler.query.set_values((
+                         *self.query.extra_select,
+                         *self.query.values_select,
+diff --git a/test_values_list.py b/test_values_list.py
+new file mode 100644
+index 0000000000..ae0cadb31f
+--- /dev/null
++++ b/test_values_list.py
+@@ -0,0 +1,52 @@
++import django
++from django.conf import settings
++from django.db import models
++from django.core.management import call_command
++from django.apps import apps, AppConfig
++
++class MainAppConfig(AppConfig):
++    name = '__main__'
++
++    def ready(self):
++        # Define model after app is ready
++        from django.db import models
++        global ReservedName
++        from django.apps import apps
++        apps.register_model(self.name, ReservedName)
++        class ReservedName(models.Model):
++            name = models.CharField(max_length=100)
++            order = models.IntegerField()
++
++            class Meta:
++                app_label = '__main__'
++
++settings.configure(
++    DATABASES={
++        'default': {
++            'ENGINE': 'django.db.backends.sqlite3',
++            'NAME': ':memory:',
++        }
++    },
++    INSTALLED_APPS=['__main__.MainAppConfig'],
++)
++
++django.setup()
++
++def test_composed_query():
++    # Create and apply migrations
++    call_command("makemigrations", "__main__", dry_run=False, interactive=False)
++    call_command("migrate", verbosity=0)
++    
++    # Access the dynamically created model
++    model = apps.get_model("__main__", "ReservedName")
++    obj = model.objects.create(name='a', order=2)
++    qs1 = model.objects.all()
++    
++    # Should return ('a', 2)
++    print("Test 1:", qs1.union(qs1).values_list('name', 'order').get())
++    
++    # Should return (2,) after fix
++    print("Test 2:", qs1.union(qs1).values_list('order').get())
++
++if __name__ == "__main__":
++    test_composed_query()

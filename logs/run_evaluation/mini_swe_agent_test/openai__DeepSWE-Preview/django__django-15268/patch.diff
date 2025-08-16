@@ -1,0 +1,26 @@
+diff --git a/django/db/migrations/operations/models.py b/django/db/migrations/operations/models.py
+index c120f5d32d..36405e8863 100644
+--- a/django/db/migrations/operations/models.py
++++ b/django/db/migrations/operations/models.py
+@@ -530,6 +530,10 @@ class AlterTogetherOptionOperation(ModelOptionOperation):
+ 
+ 
+ class AlterUniqueTogether(AlterTogetherOptionOperation):
++    def reduce(self, other, app_label):
++        if isinstance(other, AlterUniqueTogether) and self.name == other.name:
++            return [other]
++        return False
+     """
+     Change the value of unique_together to the target one.
+     Input value of unique_together must be a set of tuples.
+@@ -541,6 +545,10 @@ class AlterUniqueTogether(AlterTogetherOptionOperation):
+ 
+ 
+ class AlterIndexTogether(AlterTogetherOptionOperation):
++    def reduce(self, other, app_label):
++        if isinstance(other, AlterIndexTogether) and self.name == other.name:
++            return [other]
++        return False
+     """
+     Change the value of index_together to the target one.
+     Input value of index_together must be a set of tuples.

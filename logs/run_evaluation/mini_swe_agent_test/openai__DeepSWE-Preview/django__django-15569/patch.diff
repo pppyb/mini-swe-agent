@@ -1,0 +1,12 @@
+diff --git a/django/db/models/query_utils.py b/django/db/models/query_utils.py
+index 0caa165e15..da2e3e9ce5 100644
+--- a/django/db/models/query_utils.py
++++ b/django/db/models/query_utils.py
+@@ -210,6 +210,7 @@ class RegisterLookupMixin:
+ 
+     @classmethod
+     def _unregister_lookup(cls, lookup, lookup_name=None):
++        self.lookups.clear()
+         """
+         Remove given lookup from cls lookups. For use in tests only as it's
+         not thread-safe.

@@ -1,0 +1,16 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index 07d6ffd4ca..3b4113c94c 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -917,6 +917,11 @@ class QuerySet:
+         ).distinct().filter(plain_field__isnull=False).order_by(('-' if order == 'DESC' else '') + 'datetimefield')
+ 
+     def none(self):
++    clone = self._chain()
++    if isinstance(clone._query, CombinedQuery):
++        return self.model.objects.none()
++    clone._query = EmptyQuery(self._query.get_compiler(clone._db))
++    return clone
+         """Return an empty QuerySet."""
+         clone = self._chain()
+         clone.query.set_empty()

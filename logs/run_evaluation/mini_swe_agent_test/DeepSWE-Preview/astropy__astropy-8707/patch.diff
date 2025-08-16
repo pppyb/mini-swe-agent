@@ -1,0 +1,15 @@
+diff --git a/astropy/io/fits/card.py b/astropy/io/fits/card.py
+index 8c1ac5d738..6cafde29b4 100644
+--- a/astropy/io/fits/card.py
++++ b/astropy/io/fits/card.py
+@@ -546,6 +546,10 @@ class Card(_Verify):
+ 
+     @classmethod
+     def fromstring(cls, image):
++    if isinstance(image, bytes):
++        image = image.decode("ascii")
++    elif not isinstance(image, str):
++        raise TypeError("image must be bytes or str")
+         """
+         Construct a `Card` object from a (raw) string. It will pad the string
+         if it is not the length of a card image (80 columns).  If the card

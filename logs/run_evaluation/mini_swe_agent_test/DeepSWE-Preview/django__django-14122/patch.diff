@@ -1,0 +1,12 @@
+diff --git a/django/db/models/sql/compiler.py b/django/db/models/sql/compiler.py
+index 850734709d..9b5063f765 100644
+--- a/django/db/models/sql/compiler.py
++++ b/django/db/models/sql/compiler.py
+@@ -61,6 +61,7 @@ class SQLCompiler:
+         return extra_select, order_by, group_by
+ 
+     def get_group_by(self, select, order_by):
++        model = self.query.model
+         """
+         Return a list of 2-tuples of form (sql, params).
+ 

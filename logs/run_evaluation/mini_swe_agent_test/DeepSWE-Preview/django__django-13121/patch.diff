@@ -1,0 +1,69 @@
+diff --git a/django/db/backends/base/operations.py b/django/db/backends/base/operations.py
+index 2e283a3193..81378a751b 100644
+--- a/django/db/backends/base/operations.py
++++ b/django/db/backends/base/operations.py
+@@ -1,5 +1,5 @@
+-import datetime
+ import decimal
++import datetime
+ from importlib import import_module
+ 
+ import sqlparse
+@@ -580,7 +580,11 @@ class BaseDatabaseOperations:
+ 
+     def convert_durationfield_value(self, value, expression, connection):
+         if value is not None:
+-            return datetime.timedelta(0, 0, value)
++    if isinstance(value, str):
++        value = float(value)
++    elif isinstance(value, decimal.Decimal):
++        value = float(value)
++    return datetime.timedelta(microseconds=int(value))
+ 
+     def check_expression_support(self, expression):
+         """
+diff --git a/test_script.py b/test_script.py
+new file mode 100644
+index 0000000000..020b963f68
+--- /dev/null
++++ b/test_script.py
+@@ -0,0 +1,39 @@
++import django
++from django.conf import settings
++from django.db import models, connection
++from django.db.models import F
++from django.apps import apps
++from datetime import timedelta
++
++settings.configure(
++    DATABASES={
++        'default': {
++            'ENGINE': 'django.db.backends.sqlite3',
++            'NAME': ':memory:',
++        }
++    },
++    INSTALLED_APPS=[
++        __name__,
++    ],
++)
++
++django.setup()
++
++class Experiment(models.Model):
++    estimated_time = models.DurationField()
++
++    class Meta:
++        app_label = __name__
++
++# Register model with app config
++app_config = apps.get_app_config(__name__)
++apps.register_model('experiment', Experiment)
++
++# Create table
++with connection.schema_editor() as schema_editor:
++    schema_editor.create_model(Experiment)
++
++# Test data and query
++Experiment.objects.create(estimated_time=timedelta(days=1))
++list(Experiment.objects.annotate(duration=F('estimated_time') + timedelta(1)))
++print("Test completed without errors.")

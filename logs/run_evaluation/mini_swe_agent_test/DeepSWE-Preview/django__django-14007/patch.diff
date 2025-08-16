@@ -1,0 +1,23 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 55b1691166..525366bec2 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -873,6 +873,10 @@ class Model(metaclass=ModelBase):
+             if results:
+                 for value, field in zip(results[0], returning_fields):
+                     setattr(self, field.attname, value)
++        connection = connections[using]
++        converted_value = field.from_db_value(value, None, connection)
++        if converted_value is not None:
++            setattr(self, field.attname, converted_value)
+         return updated
+ 
+     def _do_update(self, base_qs, using, pk_val, values, update_fields, forced_update):
+@@ -1721,6 +1725,7 @@ class Model(metaclass=ModelBase):
+     @classmethod
+     def _check_local_fields(cls, fields, option):
+         from django.db import models
++from django.db import connections
+ 
+         # In order to avoid hitting the relation tree prematurely, we use our
+         # own fields_map instead of using get_field()

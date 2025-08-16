@@ -1,0 +1,1729 @@
++ source /opt/miniconda3/bin/activate
+++ _CONDA_ROOT=/opt/miniconda3
+++ . /opt/miniconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/opt/miniconda3/bin/conda
++++ CONDA_EXE=/opt/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /opt/miniconda3/bin/conda
+++++ dirname /opt/miniconda3/bin
++++ PATH=/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
+++ conda activate
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate
++++ /opt/miniconda3/bin/conda shell.posix activate
+++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
+++ eval 'PS1='\''(base) '\''
+export PATH='\''/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
++++ PS1='(base) '
++++ export PATH=/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++++ PATH=/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++++ export CONDA_PREFIX=/opt/miniconda3
++++ CONDA_PREFIX=/opt/miniconda3
++++ export CONDA_SHLVL=1
++++ CONDA_SHLVL=1
++++ export CONDA_DEFAULT_ENV=base
++++ CONDA_DEFAULT_ENV=base
++++ export 'CONDA_PROMPT_MODIFIER=(base) '
++++ CONDA_PROMPT_MODIFIER='(base) '
++++ export CONDA_EXE=/opt/miniconda3/bin/conda
++++ CONDA_EXE=/opt/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ conda activate testbed
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate testbed
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate testbed
+++ /opt/miniconda3/bin/conda shell.posix activate testbed
++ ask_conda='PS1='\''(testbed) '\''
+export PATH='\''/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''testbed'\''
+export CONDA_PROMPT_MODIFIER='\''(testbed) '\''
+export CONDA_PREFIX_1='\''/opt/miniconda3'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
++ eval 'PS1='\''(testbed) '\''
+export PATH='\''/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''testbed'\''
+export CONDA_PROMPT_MODIFIER='\''(testbed) '\''
+export CONDA_PREFIX_1='\''/opt/miniconda3'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
+++ PS1='(testbed) '
+++ export PATH=/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export CONDA_PREFIX=/opt/miniconda3/envs/testbed
+++ CONDA_PREFIX=/opt/miniconda3/envs/testbed
+++ export CONDA_SHLVL=2
+++ CONDA_SHLVL=2
+++ export CONDA_DEFAULT_ENV=testbed
+++ CONDA_DEFAULT_ENV=testbed
+++ export 'CONDA_PROMPT_MODIFIER=(testbed) '
+++ CONDA_PROMPT_MODIFIER='(testbed) '
+++ export CONDA_PREFIX_1=/opt/miniconda3
+++ CONDA_PREFIX_1=/opt/miniconda3
+++ export CONDA_EXE=/opt/miniconda3/bin/conda
+++ CONDA_EXE=/opt/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ cd /testbed
++ sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
++ locale-gen
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
++ export LANG=en_US.UTF-8
++ LANG=en_US.UTF-8
++ export LANGUAGE=en_US:en
++ LANGUAGE=en_US:en
++ export LC_ALL=en_US.UTF-8
++ LC_ALL=en_US.UTF-8
++ git config --global --add safe.directory /testbed
++ cd /testbed
++ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   django/db/models/fields/__init__.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	django/db/models/fields/__init__.py.orig
+
+no changes added to commit (use "git add" and/or "git commit -a")
++ git show
+commit fc2b1cc926e34041953738e58fa6ad3053059b22
+Author: Saad <saad@share.fullhosts.com>
+Date:   Fri Oct 25 00:39:12 2019 +0300
+
+    Fixed #30904 -- Doc'd caveat about using filtered queryset with select_for_update() on MySQL.
+
+diff --git a/docs/ref/databases.txt b/docs/ref/databases.txt
+index 1667e911e2..5813fc03e6 100644
+--- a/docs/ref/databases.txt
++++ b/docs/ref/databases.txt
+@@ -630,6 +630,11 @@ the ``SELECT ... FOR UPDATE`` statement. If ``select_for_update()`` is used
+ with ``nowait=True``, ``skip_locked=True``, or ``of`` then a
+ :exc:`~django.db.NotSupportedError` is raised.
+ 
++When using ``select_for_update()`` on MySQL, make sure you filter a queryset
++against at least set of fields contained in unique constraints or only against
++fields covered by indexes. Otherwise, an exclusive write lock will be acquired
++over the full table for the duration of the transaction.
++
+ Automatic typecasting can cause unexpected results
+ --------------------------------------------------
+ 
++ git -c core.fileMode=false diff fc2b1cc926e34041953738e58fa6ad3053059b22
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index d610dc86f0..e436d8973e 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -1,3 +1,4 @@
++import enum
+ import collections.abc
+ import copy
+ import datetime
+@@ -573,6 +574,14 @@ class Field(RegisterLookupMixin):
+         return None
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         """
+         Convert the input value into the expected Python data type, raising
+         django.core.exceptions.ValidationError if the data can't be converted.
+@@ -931,6 +940,14 @@ class BooleanField(Field):
+         return "BooleanField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if self.null and value in self.empty_values:
+             return None
+         if value in (True, False):
+@@ -949,6 +966,44 @@ class BooleanField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         return self.to_python(value)
+ 
+@@ -966,6 +1021,59 @@ class BooleanField(Field):
+ 
+ 
+ class CharField(Field):
++    def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return str(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid string value"))
+     description = _("String (up to %(max_length)s)")
+ 
+     def __init__(self, *args, **kwargs):
+@@ -1008,6 +1116,14 @@ class CharField(Field):
+         return "CharField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if isinstance(value, str) or value is None:
+             return value
+         return str(value)
+@@ -1149,7 +1265,53 @@ class DateField(DateTimeCheckMixin, Field):
+         return "DateField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         if isinstance(value, datetime.datetime):
+             if settings.USE_TZ and timezone.is_aware(value):
+@@ -1281,7 +1443,53 @@ class DateTimeField(DateField):
+         return "DateTimeField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         if isinstance(value, datetime.datetime):
+             return value
+@@ -1481,7 +1689,53 @@ class DecimalField(Field):
+         return "DecimalField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         if isinstance(value, float):
+             return self.context.create_decimal_from_float(value)
+@@ -1528,7 +1782,53 @@ class DurationField(Field):
+         return "DurationField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         if isinstance(value, datetime.timedelta):
+             return value
+@@ -1550,6 +1850,44 @@ class DurationField(Field):
+         if connection.features.has_native_duration_field:
+             return value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         return duration_microseconds(value)
+ 
+@@ -1640,6 +1978,44 @@ class FilePathField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         return str(value)
+ 
+@@ -1668,6 +2044,44 @@ class FloatField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         try:
+             return float(value)
+@@ -1680,7 +2094,53 @@ class FloatField(Field):
+         return "FloatField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         try:
+             return float(value)
+@@ -1699,6 +2159,417 @@ class FloatField(Field):
+ 
+ 
+ class IntegerField(Field):
++    def to_python(self, value):
++        if value is None:
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
++    def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++            return value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        try:
++            return int(value)
++        except (TypeError, ValueError):
++            raise ValidationError(_("Invalid integer value"))
+     empty_strings_allowed = False
+     default_error_messages = {
+         'invalid': _('“%(value)s” value must be an integer.'),
+@@ -1755,6 +2626,44 @@ class IntegerField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         try:
+             return int(value)
+@@ -1767,7 +2676,53 @@ class IntegerField(Field):
+         return "IntegerField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return value
+         try:
+             return int(value)
+@@ -1824,6 +2779,44 @@ class IPAddressField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         return str(value)
+ 
+@@ -1878,7 +2871,53 @@ class GenericIPAddressField(Field):
+         return "GenericIPAddressField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         if not isinstance(value, str):
+             value = str(value)
+@@ -1895,6 +2934,44 @@ class GenericIPAddressField(Field):
+     def get_prep_value(self, value):
+         value = super().get_prep_value(value)
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         if value and ':' in value:
+             try:
+@@ -2023,6 +3100,14 @@ class TextField(Field):
+         return "TextField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if isinstance(value, str) or value is None:
+             return value
+         return str(value)
+@@ -2118,7 +3203,53 @@ class TimeField(DateTimeCheckMixin, Field):
+         return "TimeField"
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         if isinstance(value, datetime.time):
+             return value
+@@ -2255,6 +3386,14 @@ class BinaryField(Field):
+         return b64encode(self.value_from_object(obj)).decode('ascii')
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         # If it's a string, it should be base64-encoded data
+         if isinstance(value, str):
+             return memoryview(b64decode(value.encode('ascii')))
+@@ -2286,6 +3425,44 @@ class UUIDField(Field):
+ 
+     def get_db_prep_value(self, value, connection, prepared=False):
+         if value is None:
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+             return None
+         if not isinstance(value, uuid.UUID):
+             value = self.to_python(value)
+@@ -2295,6 +3472,14 @@ class UUIDField(Field):
+         return value.hex
+ 
+     def to_python(self, value):
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
++        if isinstance(value, enum.Enum):
++            value = value.value
+         if value is not None and not isinstance(value, uuid.UUID):
+             input_form = 'int' if isinstance(value, int) else 'hex'
+             try:
++ source /opt/miniconda3/bin/activate
+++ _CONDA_ROOT=/opt/miniconda3
+++ . /opt/miniconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/opt/miniconda3/bin/conda
++++ CONDA_EXE=/opt/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ '[' -z x ']'
+++ conda activate
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1='(testbed) '
++++ __conda_exe shell.posix activate
++++ /opt/miniconda3/bin/conda shell.posix activate
+++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3'\''
+export CONDA_SHLVL='\''3'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_2='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
+++ eval 'PS1='\''(base) '\''
+export PATH='\''/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3'\''
+export CONDA_SHLVL='\''3'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_2='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
++++ PS1='(base) '
++++ export PATH=/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++++ PATH=/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++++ export CONDA_PREFIX=/opt/miniconda3
++++ CONDA_PREFIX=/opt/miniconda3
++++ export CONDA_SHLVL=3
++++ CONDA_SHLVL=3
++++ export CONDA_DEFAULT_ENV=base
++++ CONDA_DEFAULT_ENV=base
++++ export 'CONDA_PROMPT_MODIFIER=(base) '
++++ CONDA_PROMPT_MODIFIER='(base) '
++++ export CONDA_PREFIX_2=/opt/miniconda3/envs/testbed
++++ CONDA_PREFIX_2=/opt/miniconda3/envs/testbed
++++ export CONDA_EXE=/opt/miniconda3/bin/conda
++++ CONDA_EXE=/opt/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ conda activate testbed
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate testbed
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate testbed
+++ /opt/miniconda3/bin/conda shell.posix activate testbed
++ ask_conda='PS1='\''(testbed) '\''
+export PATH='\''/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_SHLVL='\''4'\''
+export CONDA_DEFAULT_ENV='\''testbed'\''
+export CONDA_PROMPT_MODIFIER='\''(testbed) '\''
+export CONDA_PREFIX_3='\''/opt/miniconda3'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
++ eval 'PS1='\''(testbed) '\''
+export PATH='\''/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'\''
+export CONDA_PREFIX='\''/opt/miniconda3/envs/testbed'\''
+export CONDA_SHLVL='\''4'\''
+export CONDA_DEFAULT_ENV='\''testbed'\''
+export CONDA_PROMPT_MODIFIER='\''(testbed) '\''
+export CONDA_PREFIX_3='\''/opt/miniconda3'\''
+export CONDA_EXE='\''/opt/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/opt/miniconda3/bin/python'\'''
+++ PS1='(testbed) '
+++ export PATH=/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/condabin:/opt/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export CONDA_PREFIX=/opt/miniconda3/envs/testbed
+++ CONDA_PREFIX=/opt/miniconda3/envs/testbed
+++ export CONDA_SHLVL=4
+++ CONDA_SHLVL=4
+++ export CONDA_DEFAULT_ENV=testbed
+++ CONDA_DEFAULT_ENV=testbed
+++ export 'CONDA_PROMPT_MODIFIER=(testbed) '
+++ CONDA_PROMPT_MODIFIER='(testbed) '
+++ export CONDA_PREFIX_3=/opt/miniconda3
+++ CONDA_PREFIX_3=/opt/miniconda3
+++ export CONDA_EXE=/opt/miniconda3/bin/conda
+++ CONDA_EXE=/opt/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/opt/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python -m pip install -e .
+Obtaining file:///testbed
+Requirement already satisfied: pytz in /opt/miniconda3/envs/testbed/lib/python3.6/site-packages (from Django==3.1) (2024.2)
+Requirement already satisfied: sqlparse in /opt/miniconda3/envs/testbed/lib/python3.6/site-packages (from Django==3.1) (0.4.4)
+Requirement already satisfied: asgiref in /opt/miniconda3/envs/testbed/lib/python3.6/site-packages (from Django==3.1) (3.4.1)
+Requirement already satisfied: typing-extensions in /opt/miniconda3/envs/testbed/lib/python3.6/site-packages (from asgiref->Django==3.1) (4.1.1)
+Installing collected packages: Django
+  Attempting uninstall: Django
+    Found existing installation: Django 3.1
+    Uninstalling Django-3.1:
+      Successfully uninstalled Django-3.1
+  Running setup.py develop for Django
+Successfully installed Django-3.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
++ git checkout fc2b1cc926e34041953738e58fa6ad3053059b22 tests/model_enums/tests.py
+Updated 0 paths from 246d860317
++ git apply -v -
+Checking patch tests/model_enums/tests.py...
+Applied patch tests/model_enums/tests.py cleanly.
++ : '>>>>> Start Test Output'
++ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 model_enums.tests
+Traceback (most recent call last):
+  File "./tests/runtests.py", line 23, in <module>
+    from django.test import TestCase, TransactionTestCase
+  File "/testbed/django/test/__init__.py", line 3, in <module>
+    from django.test.client import Client, RequestFactory
+  File "/testbed/django/test/client.py", line 14, in <module>
+    from django.core.handlers.base import BaseHandler
+  File "/testbed/django/core/handlers/base.py", line 8, in <module>
+    from django.urls import get_resolver, set_urlconf
+  File "/testbed/django/urls/__init__.py", line 1, in <module>
+    from .base import (
+  File "/testbed/django/urls/base.py", line 9, in <module>
+    from .exceptions import NoReverseMatch, Resolver404
+  File "/testbed/django/urls/exceptions.py", line 1, in <module>
+    from django.http import Http404
+  File "/testbed/django/http/__init__.py", line 5, in <module>
+    from django.http.response import (
+  File "/testbed/django/http/response.py", line 15, in <module>
+    from django.core.serializers.json import DjangoJSONEncoder
+  File "/testbed/django/core/serializers/__init__.py", line 23, in <module>
+    from django.core.serializers.base import SerializerDoesNotExist
+  File "/testbed/django/core/serializers/base.py", line 7, in <module>
+    from django.db import models
+  File "/testbed/django/db/models/__init__.py", line 3, in <module>
+    from django.db.models.aggregates import *  # NOQA
+  File "/testbed/django/db/models/aggregates.py", line 5, in <module>
+    from django.db.models.expressions import Case, Func, Star, When
+  File "/testbed/django/db/models/expressions.py", line 8, in <module>
+    from django.db.models import fields
+  File "/testbed/django/db/models/fields/__init__.py", line 969
+    if isinstance(value, enum.Enum):
+     ^
+IndentationError: expected an indented block
++ : '>>>>> End Test Output'
++ git checkout fc2b1cc926e34041953738e58fa6ad3053059b22 tests/model_enums/tests.py
+Updated 1 path from 246d860317

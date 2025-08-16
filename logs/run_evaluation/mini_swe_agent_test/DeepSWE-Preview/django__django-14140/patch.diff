@@ -1,0 +1,44 @@
+diff --git a/test_script.py b/test_script.py
+new file mode 100644
+index 0000000000..0cebe4c26a
+--- /dev/null
++++ b/test_script.py
+@@ -0,0 +1,20 @@
++import sys
++sys.path.insert(0, ".")
++
++import os
++import django
++from django.conf import settings
++
++os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'test_settings')
++django.setup()
++
++from django.db.models import Q, Exists
++from django.contrib.auth import get_user_model
++
++# Test case that previously caused the error
++try:
++    q = Q(Exists(get_user_model().objects.filter(username='jim')))
++    print("Deconstructed:", q.deconstruct())
++    print("Success! No TypeError occurred.")
++except Exception as e:
++    print("Error:", e)
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..efccff9904
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,12 @@
++SECRET_KEY = 'test-secret'
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    }
++}
++AUTH_USER_MODEL = 'auth.User'
++INSTALLED_APPS = [
++    'django.contrib.auth',
++    'django.contrib.contenttypes',
++]

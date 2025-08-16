@@ -1,0 +1,1 @@
+litellm.NotFoundError: NotFoundError: Hosted_vllmException - The model `Devstral-Small-2505` does not exist.

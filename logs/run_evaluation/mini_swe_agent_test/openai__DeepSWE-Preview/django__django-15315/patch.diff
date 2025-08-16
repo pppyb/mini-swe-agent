@@ -1,0 +1,54 @@
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index 88c9ca9f28..a257b39a3e 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -517,8 +517,7 @@ class Field(RegisterLookupMixin):
+         # Needed for @total_ordering
+         if isinstance(other, Field):
+             return (
+-                self.creation_counter == other.creation_counter and
+-                getattr(self, 'model', None) == getattr(other, 'model', None)
++                self.creation_counter == other.creation_counter
+             )
+         return NotImplemented
+ 
+diff --git a/test_app/__init__.py b/test_app/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/test_hash_stability.py b/test_hash_stability.py
+new file mode 100644
+index 0000000000..b1eb673ab2
+--- /dev/null
++++ b/test_hash_stability.py
+@@ -0,0 +1,19 @@
++import os
++import django
++from django.conf import settings
++
++os.environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
++django.setup()
++
++from django.db import models
++
++class Book(models.Model):
++    class Meta:
++        app_label = 'test_app'
++
++f = models.CharField(max_length=200)
++d = {f: 1}
++
++Book.add_to_class('title', f)
++
++assert f in d  # Should not raise AssertionError
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..5a7c130dce
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,6 @@
++from django.conf.global_settings import INSTALLED_APPS
++
++INSTALLED_APPS += [
++    'django.contrib.contenttypes',
++    'test_app',
++]

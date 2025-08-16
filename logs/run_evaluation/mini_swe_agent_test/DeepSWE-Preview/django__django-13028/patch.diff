@@ -1,0 +1,85 @@
+diff --git a/temp_model_fix.py b/temp_model_fix.py
+new file mode 100644
+index 0000000000..ca45cdbe11
+--- /dev/null
++++ b/temp_model_fix.py
+@@ -0,0 +1,7 @@
++class ProductMetaDataType(models.Model):
++    label = models.CharField(max_length=255, unique=True, blank=False, null=False)
++    is_filterable = models.BooleanField(default=False, verbose_name=_("filterable"))  # Renamed from 'filterable'
++    class Meta:
++        app_label = "adminpricing"
++    def __str__(self):
++        return self.label
+diff --git a/test_filter_fix.py b/test_filter_fix.py
+new file mode 100644
+index 0000000000..bb12224513
+--- /dev/null
++++ b/test_filter_fix.py
+@@ -0,0 +1,35 @@
++import django
++from django.conf import settings
++
++def main():
++    settings.configure(
++        INSTALLED_APPS=["django.contrib.contenttypes"],
++        DATABASES={"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}},
++    )
++    django.setup()
++
++    from django.db import models
++
++    class ProductMetaDataType(models.Model):
++        label = models.CharField(max_length=255)
++        is_filterable = models.BooleanField()  # Renamed field
++
++        class Meta:
++            app_label = "adminpricing"
++
++    class ProductMetaData(models.Model):
++        metadata_type = models.ForeignKey(ProductMetaDataType, on_delete=models.CASCADE)
++        value = models.TextField()
++
++        class Meta:
++            app_label = "adminpricing"
++
++    # Test the filter operation
++    try:
++        ProductMetaData.objects.filter(value="Dark Vador", metadata_type__is_filterable=False)
++        print("SUCCESS: Filter executed without errors")
++    except Exception as e:
++        print(f"ERROR: {str(e)}")
++
++if __name__ == "__main__":
++    main()
+diff --git a/verify_fix.py b/verify_fix.py
+new file mode 100644
+index 0000000000..83fae78e64
+--- /dev/null
++++ b/verify_fix.py
+@@ -0,0 +1,25 @@
++from django.db import models
++
++class ProductMetaDataType(models.Model):
++    filterable = models.BooleanField()  # Original problematic field
++
++class ProductMetaData(models.Model):
++    metadata_type = models.ForeignKey(ProductMetaDataType, on_delete=models.CASCADE)
++
++# This should raise NotSupportedError
++try:
++    ProductMetaData.objects.filter(metadata_type__filterable=True)
++except Exception as e:
++    print(f"Expected error: {str(e)}")
++
++# Now apply the fix
++ProductMetaDataType.is_filterable = ProductMetaDataType.filterable
++del ProductMetaDataType._meta.fields[1]  # Remove original field
++ProductMetaDataType.add_to_class('is_filterable', models.BooleanField())
++
++# Test the fixed version
++try:
++    ProductMetaData.objects.filter(metadata_type__is_filterable=True)
++    print("SUCCESS: Filter works after renaming field")
++except Exception as e:
++    print(f"Unexpected error: {str(e)}")

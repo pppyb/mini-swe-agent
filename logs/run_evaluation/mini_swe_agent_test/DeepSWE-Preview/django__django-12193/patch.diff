@@ -1,0 +1,95 @@
+diff --git a/django/contrib/postgres/forms/array.py b/django/contrib/postgres/forms/array.py
+index 2e19cd574a..3c4951e8ea 100644
+--- a/django/contrib/postgres/forms/array.py
++++ b/django/contrib/postgres/forms/array.py
+@@ -137,17 +137,18 @@ class SplitArrayWidget(forms.Widget):
+             self.widget.is_localized = self.is_localized
+         value = value or []
+         context['widget']['subwidgets'] = []
+-        final_attrs = self.build_attrs(attrs)
+-        id_ = final_attrs.get('id')
++        original_final_attrs = self.build_attrs(attrs)
++        id_ = original_final_attrs.get('id')
+         for i in range(max(len(value), self.size)):
+             try:
+                 widget_value = value[i]
+             except IndexError:
+                 widget_value = None
++            current_final_attrs = original_final_attrs.copy()
+             if id_:
+-                final_attrs = {**final_attrs, 'id': '%s_%s' % (id_, i)}
++                current_final_attrs = {**current_final_attrs, 'id': '%s_%s' % (id_, i)}
+             context['widget']['subwidgets'].append(
+-                self.widget.get_context(name + '_%s' % i, widget_value, final_attrs)['widget']
++                self.widget.get_context(name + '_%s' % i, widget_value, current_final_attrs)['widget']
+             )
+         return context
+ 
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..9cfb566680
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,17 @@
++INSTALLED_APPS = [
++    'django.contrib.postgres',
++]
++
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.postgresql',
++        'NAME': 'test',
++        'USER': 'test',
++        'PASSWORD': 'test',
++        'HOST': 'localhost',
++        'PORT': '',
++    }
++}
++
++USE_I18N = True
++SECRET_KEY = 'dummy-secret-key'
+diff --git a/test_split_array.py b/test_split_array.py
+new file mode 100644
+index 0000000000..91c70d080b
+--- /dev/null
++++ b/test_split_array.py
+@@ -0,0 +1,39 @@
++import django
++from django.conf import settings
++
++settings.configure(
++    INSTALLED_APPS=[
++        "django.contrib.postgres",
++    ],
++    DATABASES={
++        "default": {
++            "ENGINE": "django.db.backends.postgresql",
++            "NAME": "test",
++            "USER": "test",
++            "PASSWORD": "test",
++            "HOST": "localhost",
++            "PORT": "",
++        }
++    },
++    USE_I18N=True,
++    SECRET_KEY="dummy-secret-key",
++)
++django.setup()
++
++from django import forms
++from django.contrib.postgres.forms import SplitArrayField
++from django.forms.widgets import CheckboxInput
++
++class TestForm(forms.Form):
++    bool_array = SplitArrayField(forms.BooleanField(widget=CheckboxInput), size=3)
++
++form = TestForm(initial={'bool_array': [True, False, True]})
++print("Rendered HTML:")
++print(form['bool_array'].as_widget())
++print("\nWidget values:")
++base_widget = form.fields['bool_array'].widget.widget
++for i in range(3):
++    name_with_index = 'bool_array_' + str(i)
++    value = [True, False, True][i]
++    context = base_widget.get_context(name_with_index, value, {})
++    print(f"Widget {i}: 'checked' in context: {'checked' in context['widget'].get('attrs', {})}")

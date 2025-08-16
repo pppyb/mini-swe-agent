@@ -1,0 +1,30 @@
+diff --git a/django/views/generic/base.py b/django/views/generic/base.py
+index ea5baca08d..18f7fc76d2 100644
+--- a/django/views/generic/base.py
++++ b/django/views/generic/base.py
+@@ -157,6 +157,12 @@ class TemplateResponseMixin:
+ class TemplateView(TemplateResponseMixin, ContextMixin, View):
+     """Render a template."""
+     def get(self, request, *args, **kwargs):
++        resolved_kwargs = {}
++        for key, value in kwargs.items():
++            if isinstance(value, SimpleLazyObject):
++                resolved_kwargs[key] = force_str(value)
++            else:
++                resolved_kwargs[key] = value
+         # RemovedInDjango40Warning: when the deprecation ends, replace with:
+         #   context = self.get_context_data()
+         context_kwargs = _wrap_url_kwargs_with_deprecation_warning(kwargs)
+@@ -208,6 +214,12 @@ class RedirectView(View):
+         return url
+ 
+     def get(self, request, *args, **kwargs):
++        resolved_kwargs = {}
++        for key, value in kwargs.items():
++            if isinstance(value, SimpleLazyObject):
++                resolved_kwargs[key] = force_str(value)
++            else:
++                resolved_kwargs[key] = value
+         url = self.get_redirect_url(*args, **kwargs)
+         if url:
+             if self.permanent:

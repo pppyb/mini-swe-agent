@@ -1,0 +1,56 @@
+diff --git a/django/db/models/fields/files.py b/django/db/models/fields/files.py
+index e10a5bb6d9..d7ffacc533 100644
+--- a/django/db/models/fields/files.py
++++ b/django/db/models/fields/files.py
+@@ -227,7 +227,21 @@ class FileField(Field):
+     def __init__(self, verbose_name=None, name=None, upload_to='', storage=None, **kwargs):
+         self._primary_key_set_explicitly = 'primary_key' in kwargs
+ 
+-        self.storage = storage or default_storage
++        if storage is not None:
++
++            if callable(storage):
++
++                self._storage_callable = storage
++
++                self.storage = storage()
++
++            else:
++
++                self.storage = storage
++
++        else:
++
++            self.storage = default_storage
+         if callable(self.storage):
+             self.storage = self.storage()
+             if not isinstance(self.storage, Storage):
+@@ -275,10 +289,9 @@ class FileField(Field):
+ 
+     def deconstruct(self):
+         name, path, args, kwargs = super().deconstruct()
+-        if kwargs.get("max_length") == 100:
+-            del kwargs["max_length"]
+-        kwargs['upload_to'] = self.upload_to
+-        if self.storage is not default_storage:
++        if hasattr(self, '_storage_callable'):
++            kwargs['storage'] = self._storage_callable
++        else:
+             kwargs['storage'] = self.storage
+         return name, path, args, kwargs
+ 
+@@ -398,10 +411,10 @@ class ImageField(FileField):
+ 
+     def deconstruct(self):
+         name, path, args, kwargs = super().deconstruct()
+-        if self.width_field:
+-            kwargs['width_field'] = self.width_field
+-        if self.height_field:
+-            kwargs['height_field'] = self.height_field
++        if hasattr(self, '_storage_callable'):
++            kwargs['storage'] = self._storage_callable
++        else:
++            kwargs['storage'] = self.storage
+         return name, path, args, kwargs
+ 
+     def contribute_to_class(self, cls, name, **kwargs):

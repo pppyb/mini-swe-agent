@@ -1,0 +1,17 @@
+diff --git a/test_trim.py b/test_trim.py
+new file mode 100644
+index 0000000000..b7cd1ebab4
+--- /dev/null
++++ b/test_trim.py
+@@ -0,0 +1,11 @@
++from django.contrib.admindocs.utils import trim_docstring
++
++def sample_func():
++    """This is a docstring without an empty first line.
++    It should be processed without errors.
++    """
++    return trim_docstring(sample_func.__doc__)
++
++result = sample_func()
++print("Trimmed docstring:")
++print(result)

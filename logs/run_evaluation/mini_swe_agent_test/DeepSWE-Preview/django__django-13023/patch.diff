@@ -1,0 +1,25 @@
+diff --git a/django/db/models/fields/test_decimal_field.py b/django/db/models/fields/test_decimal_field.py
+new file mode 100644
+index 0000000000..88a691a6e4
+--- /dev/null
++++ b/django/db/models/fields/test_decimal_field.py
+@@ -0,0 +1,19 @@
++import os
++os.environ.setdefault("DJANGO_SETTINGS_MODULE", "__main__")
++from django.conf import settings
++settings.configure(SECRET_KEY="test_key")
++import django
++django.setup()
++
++from django.core.exceptions import ValidationError
++from django.db.models import DecimalField
++
++field = DecimalField()
++
++try:
++    field.to_python({"invalid": "data"})
++except ValidationError as e:
++    print(f"Correctly raised ValidationError: {e}")
++except Exception as e:
++    print(f"Unexpected error type: {type(e)}")
++EOF && cd ../../.. && PYTHONPATH=$(pwd) python django/db/models/fields/test_decimal_field.py

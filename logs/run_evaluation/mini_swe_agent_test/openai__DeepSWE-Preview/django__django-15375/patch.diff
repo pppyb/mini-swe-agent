@@ -1,0 +1,67 @@
+diff --git a/django/db/models/aggregates.py b/django/db/models/aggregates.py
+index 8c4eae7906..3568a5ac20 100644
+--- a/django/db/models/aggregates.py
++++ b/django/db/models/aggregates.py
+@@ -15,6 +15,7 @@ __all__ = [
+ 
+ 
+ class Aggregate(Func):
++backend = connections[alias].features
+     template = '%(function)s(%(distinct)s%(expressions)s)'
+     contains_aggregate = True
+     name = None
+@@ -24,6 +25,7 @@ class Aggregate(Func):
+     empty_result_set_value = None
+ 
+     def __init__(self, *expressions, distinct=False, filter=None, default=None, **extra):
++        self.default = default
+         if distinct and not self.allow_distinct:
+             raise TypeError("%s does not allow distinct." % self.__class__.__name__)
+         if default is not None and self.empty_result_set_value is not None:
+@@ -78,6 +80,22 @@ class Aggregate(Func):
+         return []
+ 
+     def as_sql(self, compiler, connection, **extra_context):
++        sql, params = super().as_sql(compiler, connection, **extra_context)
++        if self.default is not None and not compiler.query.is_subquery:
++            sql = f"COALESCE({sql}, %s)"
++            params = [self.default] + params
++        return sql, params
++        sql, params = super().as_sql(compiler, connection, **extra_context)
++        if self.default is not None:
++            sql = f"COALESCE({sql}, %s)"
++            params = [self.default] + params
++        return sql, params
++        sql, params = super().as_sql(compiler, connection, **extra_context)
++        if self.default is not None:
++            sql = connection.ops.wrap_database_errors(sql)
++            sql = f"COALESCE({sql}, %s)" 
++            params = [self.default] + params
++        return sql, params
+         extra_context['distinct'] = 'DISTINCT ' if self.distinct else ''
+         if self.filter:
+             if connection.features.supports_aggregate_filter_clause:
+@@ -120,6 +138,7 @@ class Count(Aggregate):
+     empty_result_set_value = 0
+ 
+     def __init__(self, expression, filter=None, **extra):
++        self.default = default
+         if expression == '*':
+             expression = Star()
+         if isinstance(expression, Star) and filter is not None:
+@@ -141,6 +160,7 @@ class StdDev(NumericOutputFieldMixin, Aggregate):
+     name = 'StdDev'
+ 
+     def __init__(self, expression, sample=False, **extra):
++        self.default = default
+         self.function = 'STDDEV_SAMP' if sample else 'STDDEV_POP'
+         super().__init__(expression, **extra)
+ 
+@@ -158,6 +178,7 @@ class Variance(NumericOutputFieldMixin, Aggregate):
+     name = 'Variance'
+ 
+     def __init__(self, expression, sample=False, **extra):
++        self.default = default
+         self.function = 'VAR_SAMP' if sample else 'VAR_POP'
+         super().__init__(expression, **extra)
+ 

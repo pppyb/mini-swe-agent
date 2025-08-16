@@ -1,0 +1,19 @@
+diff --git a/django/forms/models.py b/django/forms/models.py
+index 7effb202e3..20e0986eba 100644
+--- a/django/forms/models.py
++++ b/django/forms/models.py
+@@ -564,6 +564,14 @@ def modelform_factory(model, form=ModelForm, fields=None, exclude=None,
+ # ModelFormSets ##############################################################
+ 
+ class BaseModelFormSet(BaseFormSet):
++    @property
++    def max_num(self):
++        if not self.can_add:
++            return self.initial_form_count()
++        return super().max_num
++    def __init__(self, *args, **kwargs):
++        self.can_add = kwargs.pop("can_add", True)
++        super().__init__(*args, **kwargs)
+     """
+     A ``FormSet`` for editing a queryset and/or adding new objects to it.
+     """

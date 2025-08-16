@@ -1,0 +1,31 @@
+diff --git a/django/contrib/auth/forms.py b/django/contrib/auth/forms.py
+index b9eb33329f..69f4686f8e 100644
+--- a/django/contrib/auth/forms.py
++++ b/django/contrib/auth/forms.py
+@@ -146,7 +146,7 @@ class UserChangeForm(forms.ModelForm):
+             'Raw passwords are not stored, so there is no way to see this '
+             'user’s password, but you can change the password using '
+             '<a href="{}">this form</a>.'
+-        ),
++        , disabled=True),
+     )
+ 
+     class Meta:
+@@ -163,17 +163,6 @@ class UserChangeForm(forms.ModelForm):
+         if user_permissions:
+             user_permissions.queryset = user_permissions.queryset.select_related('content_type')
+ 
+-    def clean_password(self):
+-        # Regardless of what the user provides, return the initial value.
+-        # This is done here, rather than on the field, because the
+-        # field does not have access to the initial value
+-        return self.initial.get('password')
+-
+-
+-class AuthenticationForm(forms.Form):
+-    """
+-    Base class for authenticating users. Extend this to get a form that accepts
+-    username/password logins.
+     """
+     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True}))
+     password = forms.CharField(

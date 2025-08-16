@@ -1,0 +1,73 @@
+diff --git a/django/db/migrations/recorder.py b/django/db/migrations/recorder.py
+index 1a37c6b7d0..d2e30405cb 100644
+--- a/django/db/migrations/recorder.py
++++ b/django/db/migrations/recorder.py
+@@ -57,6 +57,14 @@ class MigrationRecorder:
+         return self.Migration._meta.db_table in tables
+ 
+     def ensure_schema(self):
++        from django.db import router
++        from django.db import router
++        current_db = self.connection.alias
++        if not router.allow_migrate(current_db, "migrations"):
++            return
++        current_db = self.connection.alias
++        if not router.allow_migrate(current_db, "migrations"):
++            return
+         """Ensure the table exists and has the correct schema."""
+         # If the table's there, that's fine - we've never changed its schema
+         # in the codebase.
+diff --git a/test_migration_recorder.py b/test_migration_recorder.py
+new file mode 100644
+index 0000000000..0c3fc644fd
+--- /dev/null
++++ b/test_migration_recorder.py
+@@ -0,0 +1,25 @@
++from django.test import TestCase, override_settings
++from django.db import connections, router
++
++class MigrationRecorderTest(TestCase):
++    databases = ["default", "other_db"]
++    def test_migration_table_creation(self):
++        for db in connections.all():
++            if not router.allow_migrate(db.alias, "migrations"):
++                from django.db.migrations.recorder import MigrationRecorder
++                self.assertFalse(MigrationRecorder(db.connection).Migration._meta.db_table_exists())
++
++    @override_settings(DATABASES={
++        'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'},
++        'other_db': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'}
++    })
++    def test_migration_table_creation(self):
++        from django.db.migrations.recorder import MigrationRecorder
++        from django.db import connections, router
++
++        # Ensure test databases are created
++        for db in connections.all():
++            if not router.allow_migrate(db.alias, "migrations"):
++                recorder = MigrationRecorder(connections[db.alias])
++                recorder.ensure_schema()
++                self.assertNotIn(recorder.Migration._meta.db_table, recorder.connection.introspection.table_names())
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..94f56f31f9
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,17 @@
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    },
++    'other_db': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    }
++}
++
++MIGRATION_MODULES = {'migrations': None}
++DATABASE_ROUTERS = ['test_settings.Router']
++
++class Router:
++    def allow_migrate(self, db, model_name=None, **kwargs):
++        return db == 'default'

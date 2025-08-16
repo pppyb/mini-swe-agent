@@ -1,0 +1,177 @@
+diff --git a/django/contrib/auth/validators.py b/django/contrib/auth/validators.py
+index 9345c5cb0b..84c87218b8 100644
+--- a/django/contrib/auth/validators.py
++++ b/django/contrib/auth/validators.py
+@@ -5,7 +5,7 @@ from django.utils.deconstruct import deconstructible
+ from django.utils.translation import gettext_lazy as _
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.contrib.auth.validators.ASCIIUsernameValidator")
+ class ASCIIUsernameValidator(validators.RegexValidator):
+     regex = r'^[\w.@+-]+\Z'
+     message = _(
+@@ -15,7 +15,7 @@ class ASCIIUsernameValidator(validators.RegexValidator):
+     flags = re.ASCII
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.contrib.auth.validators.UnicodeUsernameValidator")
+ class UnicodeUsernameValidator(validators.RegexValidator):
+     regex = r'^[\w.@+-]+\Z'
+     message = _(
+diff --git a/django/contrib/gis/geos/geometry.py b/django/contrib/gis/geos/geometry.py
+index 36f6895224..ce56dd4ff5 100644
+--- a/django/contrib/gis/geos/geometry.py
++++ b/django/contrib/gis/geos/geometry.py
+@@ -684,7 +684,7 @@ class LinearGeometryMixin:
+         return capi.geos_isclosed(self.ptr)
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.contrib.gis.geos.geometry.GEOSGeometry")
+ class GEOSGeometry(GEOSGeometryBase, ListMixin):
+     "A class that, generally, encapsulates a GEOS geometry."
+ 
+diff --git a/django/contrib/postgres/validators.py b/django/contrib/postgres/validators.py
+index db6205f356..09d16fa66d 100644
+--- a/django/contrib/postgres/validators.py
++++ b/django/contrib/postgres/validators.py
+@@ -21,7 +21,7 @@ class ArrayMinLengthValidator(MinLengthValidator):
+         'limit_value')
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.contrib.postgres.validators.KeysValidator")
+ class KeysValidator:
+     """A validator designed for HStore to require/restrict keys."""
+ 
+diff --git a/django/core/files/storage.py b/django/core/files/storage.py
+index bbb3e8b21d..7bd6223c02 100644
+--- a/django/core/files/storage.py
++++ b/django/core/files/storage.py
+@@ -185,7 +185,7 @@ class Storage:
+         raise NotImplementedError('subclasses of Storage must provide a get_modified_time() method')
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.files.storage.FileSystemStorage")
+ class FileSystemStorage(Storage):
+     """
+     Standard filesystem storage
+diff --git a/django/core/validators.py b/django/core/validators.py
+index eec7803714..60a521df79 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _, ngettext_lazy
+ EMPTY_VALUES = (None, '', [], (), {})
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.RegexValidator")
+ class RegexValidator:
+     regex = ''
+     message = _('Enter a valid value.')
+@@ -59,7 +59,7 @@ class RegexValidator:
+         )
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.URLValidator")
+ class URLValidator(RegexValidator):
+     ul = '\u00a1-\uffff'  # Unicode letters range (must not be a raw string).
+ 
+@@ -155,7 +155,7 @@ def validate_integer(value):
+     return integer_validator(value)
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.EmailValidator")
+ class EmailValidator:
+     message = _('Enter a valid email address.')
+     code = 'invalid'
+@@ -313,7 +313,7 @@ validate_comma_separated_integer_list = int_list_validator(
+ )
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.BaseValidator")
+ class BaseValidator:
+     message = _('Ensure this value is %(limit_value)s (it is %(show_value)s).')
+     code = 'limit_value'
+@@ -346,7 +346,7 @@ class BaseValidator:
+         return x
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.MaxValueValidator")
+ class MaxValueValidator(BaseValidator):
+     message = _('Ensure this value is less than or equal to %(limit_value)s.')
+     code = 'max_value'
+@@ -355,7 +355,7 @@ class MaxValueValidator(BaseValidator):
+         return a > b
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.MinValueValidator")
+ class MinValueValidator(BaseValidator):
+     message = _('Ensure this value is greater than or equal to %(limit_value)s.')
+     code = 'min_value'
+@@ -364,7 +364,7 @@ class MinValueValidator(BaseValidator):
+         return a < b
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.MinLengthValidator")
+ class MinLengthValidator(BaseValidator):
+     message = ngettext_lazy(
+         'Ensure this value has at least %(limit_value)d character (it has %(show_value)d).',
+@@ -379,7 +379,7 @@ class MinLengthValidator(BaseValidator):
+         return len(x)
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.MaxLengthValidator")
+ class MaxLengthValidator(BaseValidator):
+     message = ngettext_lazy(
+         'Ensure this value has at most %(limit_value)d character (it has %(show_value)d).',
+@@ -394,7 +394,7 @@ class MaxLengthValidator(BaseValidator):
+         return len(x)
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.DecimalValidator")
+ class DecimalValidator:
+     """
+     Validate that the input does not exceed the maximum number of digits
+@@ -472,7 +472,7 @@ class DecimalValidator:
+         )
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.FileExtensionValidator")
+ class FileExtensionValidator:
+     message = _(
+         'File extension “%(extension)s” is not allowed. '
+@@ -525,7 +525,7 @@ def validate_image_file_extension(value):
+     return FileExtensionValidator(allowed_extensions=get_available_image_extensions())(value)
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.core.validators.ProhibitNullCharactersValidator")
+ class ProhibitNullCharactersValidator:
+     """Validate that the string doesn't contain the null character."""
+     message = _('Null characters are not allowed.')
+diff --git a/django/db/models/expressions.py b/django/db/models/expressions.py
+index 8642e1f151..aff1b711cf 100644
+--- a/django/db/models/expressions.py
++++ b/django/db/models/expressions.py
+@@ -390,7 +390,7 @@ class BaseExpression:
+         return sql, params
+ 
+ 
+-@deconstructible
++@deconstructible(path="django.db.models.expressions.Expression")
+ class Expression(BaseExpression, Combinable):
+     """An expression that can be combined with other expressions."""
+ 

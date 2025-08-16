@@ -1,0 +1,99 @@
+diff --git a/django/db/migrations/autodetector.py b/django/db/migrations/autodetector.py
+index 5f41053283..9e5a2cb8f3 100644
+--- a/django/db/migrations/autodetector.py
++++ b/django/db/migrations/autodetector.py
+@@ -1497,6 +1497,94 @@ class MigrationAutodetector:
+                 )
+ 
+     def generate_removed_altered_unique_together(self):
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if old and len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++            # Existing code to handle removal...
++        for old, new in self.get_old_new_unique_together():
++        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
++            if len(old) == 1:
++                field_name = old[0]
++                field = self.old_state.models[self.new_model_name].fields[field_name]
++                if field.unique:
++                    continue
++        # Check if unique_together is on a single field that is already unique        if len(old) == 1:
++            field_name = old[0]
++            field = self.old_state.models[self.new_model_name].fields[field_name]
++            if field.unique:
++                continue
+         self._generate_removed_altered_foo_together(operations.AlterUniqueTogether)
+ 
+     def generate_removed_altered_index_together(self):

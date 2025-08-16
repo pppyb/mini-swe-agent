@@ -1,0 +1,65 @@
+diff --git a/django/db/models/sql/compiler.py b/django/db/models/sql/compiler.py
+index 29e33c075f..47db80c492 100644
+--- a/django/db/models/sql/compiler.py
++++ b/django/db/models/sql/compiler.py
+@@ -1410,6 +1410,15 @@ class SQLDeleteCompiler(SQLCompiler):
+         return sum(self.query.alias_refcount[t] > 0 for t in self.query.alias_map) == 1
+ 
+     def _as_sql(self, query):
++        if where:
++            # Check for subquery on same table and skip WHERE clause
++            base_table_quoted = self.quote_name_unless_alias(query.base_table)
++            if re.match(rf"^.* IN $$SELECT .* FROM {re.escape(base_table_quoted)}$$$", where, re.IGNORECASE):
++                where = ""
++        if where:
++            # Check for subquery on same table and skip WHERE clause
++            if re.match(r"^.* IN \(SELECT .* FROM $s\)$", where, re.IGNORECASE):
++                where = ""
+         result = [
+             'DELETE FROM %s' % self.quote_name_unless_alias(query.base_table)
+         ]
+diff --git a/settings.py b/settings.py
+new file mode 100644
+index 0000000000..2e6fbbd44b
+--- /dev/null
++++ b/settings.py
+@@ -0,0 +1,11 @@
++from django.conf.global_settings import INSTALLED_APPS
++
++INSTALLED_APPS += ('testapp',)
++
++SECRET_KEY = "test_key"
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    }
++}
+diff --git a/test_delete_sql.py b/test_delete_sql.py
+new file mode 100644
+index 0000000000..fd1d69ffba
+--- /dev/null
++++ b/test_delete_sql.py
+@@ -0,0 +1,19 @@
++import django
++import sys
++import os
++
++sys.path.append(os.path.abspath("."))
++django.setup()
++
++def main():
++    from testapp.models import TestModel
++    from django.db import connections
++    from django.db.models.sql.compiler import SQLDeleteCompiler
++
++    query = TestModel.objects.all()
++    compiler = SQLDeleteCompiler(query, connections["default"], "default")
++    sql, params = compiler.as_sql()
++    print("Generated SQL:", sql)
++
++if __name__ == "__main__":
++    main()
+diff --git a/testapp/__init__.py b/testapp/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2

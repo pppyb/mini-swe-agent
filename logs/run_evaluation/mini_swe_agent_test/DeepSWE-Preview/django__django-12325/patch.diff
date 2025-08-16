@@ -1,0 +1,122 @@
+diff --git a/django/db/models/options.py b/django/db/models/options.py
+index a375f6ba1d..8a1af6d56c 100644
+--- a/django/db/models/options.py
++++ b/django/db/models/options.py
+@@ -242,20 +242,41 @@ class Options:
+             if self.parents:
+                 # Promote the first parent link in lieu of adding yet another
+                 # field.
+-                field = next(iter(self.parents.values()))
+-                # Look for a local field with the same name as the
+-                # first parent link. If a local field has already been
+-                # created, use it instead of promoting the parent
+-                already_created = [fld for fld in self.local_fields if fld.name == field.name]
++        for field in self.parents.values():
++            if field.remote_field.parent_link:
++                break
++        else:
++            field = next(iter(self.parents.values()))
++        already_created = [fld for fld in self.local_fields if fld.name == field.name]
++        if already_created:
++            field = already_created[0]
++        field.primary_key = True
++        self.setup_pk(field)
++        if not field.remote_field.parent_link:
++            raise ImproperlyConfigured(
++                "Add parent_link=True to %s." % field,
++            )
++            field = already_created[0]
++        field.primary_key = True
++        self.setup_pk(field)
++        if not field.remote_field.parent_link:
++            raise ImproperlyConfigured(
++                "Add parent_link=True to %s." % field,
++            )                already_created = [fld for fld in self.local_fields if fld.name == field.name]
+                 if already_created:
+                     field = already_created[0]
+                 field.primary_key = True
+                 self.setup_pk(field)
+                 if not field.remote_field.parent_link:
+                     raise ImproperlyConfigured(
++                "Add parent_link=True to %s." % field,
++            )
++                        self.setup_pk(field)
++                        if not field.remote_field.parent_link:
++                            raise ImproperlyConfigured(
+                         'Add parent_link=True to %s.' % field,
+                     )
+-            else:
++                else:
+                 auto = AutoField(verbose_name='ID', primary_key=True, auto_created=True)
+                 model.add_to_class('id', auto)
+ 
+@@ -272,9 +293,9 @@ class Options:
+             self.private_fields.append(field)
+         elif field.is_relation and field.many_to_many:
+             bisect.insort(self.local_many_to_many, field)
+-        else:
++            else:
+             bisect.insort(self.local_fields, field)
+-            self.setup_pk(field)
++                    self.setup_pk(field)
+ 
+         # If the field being added is a relation to another known field,
+         # expire the cache on this field and the forward cache on the field
+@@ -290,7 +311,7 @@ class Options:
+             except AttributeError:
+                 pass
+             self._expire_cache()
+-        else:
++            else:
+             self._expire_cache(reverse=False)
+ 
+     def setup_pk(self, field):
+@@ -393,7 +414,7 @@ class Options:
+                 if hasattr(parent, '_meta'):
+                     if parent._base_manager.name != '_base_manager':
+                         base_manager_name = parent._base_manager.name
+-                    break
++                            break
+ 
+         if base_manager_name:
+             try:
+@@ -420,7 +441,7 @@ class Options:
+             for parent in self.model.mro()[1:]:
+                 if hasattr(parent, '_meta'):
+                     default_manager_name = parent._meta.default_manager_name
+-                    break
++                            break
+ 
+         if default_manager_name:
+             try:
+@@ -645,7 +666,7 @@ class Options:
+         for int_model in self.get_base_chain(parent):
+             if int_model is proxied_model:
+                 opts = int_model._meta
+-            else:
++                else:
+                 final_field = opts.parents[int_model]
+                 targets = (final_field.remote_field.get_related_field(),)
+                 opts = int_model._meta
+diff --git a/test_parent_link.py b/test_parent_link.py
+new file mode 100644
+index 0000000000..d8ee1c24a6
+--- /dev/null
++++ b/test_parent_link.py
+@@ -0,0 +1,16 @@
++from django.core.exceptions import ImproperlyConfigured
++from django.db import models
++
++class Document(models.Model):
++    pass
++
++class Picking(Document):
++    origin = models.OneToOneField(Document, related_name='picking', on_delete=models.PROTECT)
++    document_ptr = models.OneToOneField(Document, on_delete=models.CASCADE, parent_link=True, related_name='+')
++
++try:
++    Picking._meta.get_field('origin').remote_field.parent_link
++    Picking._meta.get_field('document_ptr').remote_field.parent_link
++    print("Test passed: parent_link is correctly applied.")
++except ImproperlyConfigured as e:
++    print(f"Test failed: {e}")

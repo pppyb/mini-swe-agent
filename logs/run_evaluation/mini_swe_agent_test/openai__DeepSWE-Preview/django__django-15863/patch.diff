@@ -1,0 +1,37 @@
+diff --git a/django/template/defaultfilters.py b/django/template/defaultfilters.py
+index 7a5b28d159..1ee4cc1fda 100644
+--- a/django/template/defaultfilters.py
++++ b/django/template/defaultfilters.py
+@@ -1,3 +1,4 @@
++from decimal import Decimal
+ """Default variable filters."""
+ import random as random_module
+ import re
+@@ -94,6 +95,27 @@ def json_script(value, element_id=None):
+ 
+ @register.filter(is_safe=True)
+ def floatformat(text, arg=-1):
++    if isinstance(text, Decimal):
++        if arg == -1:
++            if text == text.to_integral_value():
++                return format(text, "f")
++            else:
++                rounded = text.quantize(Decimal("1.1"))
++                formatted = format(rounded, "f")
++                if "." in formatted:
++                    formatted = formatted.rstrip("0").rstrip(".")
++                return formatted
++        elif arg > 0:
++            rounded = text.quantize(Decimal(f"1.{{"0"*arg}}"))
++            return format(rounded, "f")
++        else:
++            decimal_places = -arg
++            target = Decimal(f"1.{{"0"*decimal_places}}")
++            if text == text.quantize(target):
++                return format(text, "f").rstrip("0").rstrip(".")
++            else:
++                rounded = text.quantize(target)
++                return format(rounded, "f")
+     """
+     Display a float to a specified number of decimal places.
+ 

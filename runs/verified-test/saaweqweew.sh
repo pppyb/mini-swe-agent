@@ -1,0 +1,22 @@
+instances_by_exit_status:
+    NotFoundError:
+    - django__django-14434
+    - django__django-13964
+    - django__django-14771
+    - django__django-14608
+    - django__django-14351
+    - astropy__astropy-14096
+    - django__django-14672
+    - django__django-13406
+    - django__django-14053
+    - django__django-14752
+    - django__django-14631
+    - django__django-14580
+    - django__django-14765
+    - django__django-14155
+    - django__django-14170
+    - django__django-14539
+    - django__django-14787
+    - django__django-14792
+    - django__django-14855
+    - django__django-14915

@@ -1,0 +1,503 @@
+diff --git a/django/conf/settings.py b/django/conf/settings.py
+new file mode 100644
+index 0000000000..1f5c1ef6ce
+--- /dev/null
++++ b/django/conf/settings.py
+@@ -0,0 +1,2 @@
++DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
++DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+diff --git a/django/contrib/admin/apps.py b/django/contrib/admin/apps.py
+index c4fba8837c..fd7c812ffb 100644
+--- a/django/contrib/admin/apps.py
++++ b/django/contrib/admin/apps.py
+@@ -5,6 +5,9 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class SimpleAdminConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     """Simple AppConfig which does not do automatic discovery."""
+ 
+     default_auto_field = 'django.db.models.AutoField'
+@@ -18,6 +21,9 @@ class SimpleAdminConfig(AppConfig):
+ 
+ 
+ class AdminConfig(SimpleAdminConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     """The default AppConfig for admin which does autodiscovery."""
+ 
+     default = True
+diff --git a/django/contrib/admindocs/apps.py b/django/contrib/admindocs/apps.py
+index 1a502688f7..c20ed3fe10 100644
+--- a/django/contrib/admindocs/apps.py
++++ b/django/contrib/admindocs/apps.py
+@@ -3,5 +3,8 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class AdminDocsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.admindocs'
+     verbose_name = _("Administrative Documentation")
+diff --git a/django/contrib/auth/apps.py b/django/contrib/auth/apps.py
+index 4e4ef06d27..a0f8f19e38 100644
+--- a/django/contrib/auth/apps.py
++++ b/django/contrib/auth/apps.py
+@@ -11,6 +11,9 @@ from .signals import user_logged_in
+ 
+ 
+ class AuthConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.auth'
+     verbose_name = _("Authentication and Authorization")
+diff --git a/django/contrib/contenttypes/apps.py b/django/contrib/contenttypes/apps.py
+index 390afb3fcf..56febd5087 100644
+--- a/django/contrib/contenttypes/apps.py
++++ b/django/contrib/contenttypes/apps.py
+@@ -12,6 +12,9 @@ from .management import (
+ 
+ 
+ class ContentTypesConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.contenttypes'
+     verbose_name = _("Content Types")
+diff --git a/django/contrib/flatpages/apps.py b/django/contrib/flatpages/apps.py
+index 4f5ef17004..b9eeadb81c 100644
+--- a/django/contrib/flatpages/apps.py
++++ b/django/contrib/flatpages/apps.py
+@@ -3,6 +3,9 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class FlatPagesConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.flatpages'
+     verbose_name = _("Flat Pages")
+diff --git a/django/contrib/gis/apps.py b/django/contrib/gis/apps.py
+index e582e76760..a522786be3 100644
+--- a/django/contrib/gis/apps.py
++++ b/django/contrib/gis/apps.py
+@@ -4,6 +4,10 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class GISConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.gis'
+     verbose_name = _("GIS")
+diff --git a/django/contrib/humanize/apps.py b/django/contrib/humanize/apps.py
+index c5fcbca794..b513acffa2 100644
+--- a/django/contrib/humanize/apps.py
++++ b/django/contrib/humanize/apps.py
+@@ -3,5 +3,8 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class HumanizeConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.humanize'
+     verbose_name = _("Humanize")
+diff --git a/django/contrib/messages/apps.py b/django/contrib/messages/apps.py
+index 0ff25d3885..a798167369 100644
+--- a/django/contrib/messages/apps.py
++++ b/django/contrib/messages/apps.py
+@@ -3,5 +3,8 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class MessagesConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.messages'
+     verbose_name = _("Messages")
+diff --git a/django/contrib/postgres/apps.py b/django/contrib/postgres/apps.py
+index 781c8728f2..c290ad6fb6 100644
+--- a/django/contrib/postgres/apps.py
++++ b/django/contrib/postgres/apps.py
+@@ -41,6 +41,9 @@ def uninstall_if_needed(setting, value, enter, **kwargs):
+ 
+ 
+ class PostgresConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.postgres'
+     verbose_name = _('PostgreSQL extensions')
+ 
+diff --git a/django/contrib/redirects/apps.py b/django/contrib/redirects/apps.py
+index c1d80ee3c1..10a596c520 100644
+--- a/django/contrib/redirects/apps.py
++++ b/django/contrib/redirects/apps.py
+@@ -3,6 +3,9 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class RedirectsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.redirects'
+     verbose_name = _("Redirects")
+diff --git a/django/contrib/sessions/apps.py b/django/contrib/sessions/apps.py
+index 8b778d1109..6396a02b50 100644
+--- a/django/contrib/sessions/apps.py
++++ b/django/contrib/sessions/apps.py
+@@ -3,5 +3,8 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class SessionsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.sessions'
+     verbose_name = _("Sessions")
+diff --git a/django/contrib/sitemaps/apps.py b/django/contrib/sitemaps/apps.py
+index ec795eab87..5777b71394 100644
+--- a/django/contrib/sitemaps/apps.py
++++ b/django/contrib/sitemaps/apps.py
+@@ -3,6 +3,9 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class SiteMapsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.sitemaps'
+     verbose_name = _("Site Maps")
+diff --git a/django/contrib/sites/apps.py b/django/contrib/sites/apps.py
+index 7f820dcc79..88839f055d 100644
+--- a/django/contrib/sites/apps.py
++++ b/django/contrib/sites/apps.py
+@@ -8,6 +8,9 @@ from .management import create_default_site
+ 
+ 
+ class SitesConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default_auto_field = 'django.db.models.AutoField'
+     name = 'django.contrib.sites'
+     verbose_name = _("Sites")
+diff --git a/django/contrib/staticfiles/apps.py b/django/contrib/staticfiles/apps.py
+index 2fbc829bf8..59d957b8a0 100644
+--- a/django/contrib/staticfiles/apps.py
++++ b/django/contrib/staticfiles/apps.py
+@@ -5,6 +5,9 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class StaticFilesConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.staticfiles'
+     verbose_name = _("Static Files")
+     ignore_patterns = ['CVS', '.*', '*~']
+diff --git a/django/contrib/syndication/apps.py b/django/contrib/syndication/apps.py
+index b3f7c6cd61..7234e92efd 100644
+--- a/django/contrib/syndication/apps.py
++++ b/django/contrib/syndication/apps.py
+@@ -3,5 +3,8 @@ from django.utils.translation import gettext_lazy as _
+ 
+ 
+ class SyndicationConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'django.contrib.syndication'
+     verbose_name = _("Syndication")
+diff --git a/tests/admin_default_site/apps.py b/tests/admin_default_site/apps.py
+index 92743c18d4..d853f60470 100644
+--- a/tests/admin_default_site/apps.py
++++ b/tests/admin_default_site/apps.py
+@@ -2,5 +2,8 @@ from django.contrib.admin.apps import SimpleAdminConfig
+ 
+ 
+ class MyCustomAdminConfig(SimpleAdminConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     verbose_name = 'My custom default admin site.'
+     default_site = 'admin_default_site.sites.CustomAdminSite'
+diff --git a/tests/apps/apps.py b/tests/apps/apps.py
+index efd2983779..05ec921331 100644
+--- a/tests/apps/apps.py
++++ b/tests/apps/apps.py
+@@ -13,10 +13,16 @@ class MyAuth(AppConfig):
+ 
+ 
+ class BadConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     """This class doesn't supply the mandatory 'name' attribute."""
+ 
+ 
+ class NotAConfig:
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps'
+ 
+ 
+@@ -25,14 +31,23 @@ class NoSuchApp(AppConfig):
+ 
+ 
+ class PlainAppsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps'
+ 
+ 
+ class RelabeledAppsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps'
+     label = 'relabeled'
+ 
+ 
+ class ModelPKAppsConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps'
+     default_auto_field = 'django.db.models.BigAutoField'
+diff --git a/tests/apps/explicit_default_config_app/apps.py b/tests/apps/explicit_default_config_app/apps.py
+index e41ad5dcbb..fee85b5142 100644
+--- a/tests/apps/explicit_default_config_app/apps.py
++++ b/tests/apps/explicit_default_config_app/apps.py
+@@ -2,4 +2,7 @@ from django.apps import AppConfig
+ 
+ 
+ class ExplicitDefaultConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.explicit_default_config_app'
+diff --git a/tests/apps/explicit_default_config_mismatch_app/apps.py b/tests/apps/explicit_default_config_mismatch_app/apps.py
+index ddbead408d..2704446c04 100644
+--- a/tests/apps/explicit_default_config_mismatch_app/apps.py
++++ b/tests/apps/explicit_default_config_mismatch_app/apps.py
+@@ -2,4 +2,7 @@ from django.apps import AppConfig
+ 
+ 
+ class ImplicitDefaultConfigMismatch(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.explicit_default_config_mismatch_app'
+diff --git a/tests/apps/namespace_package_base/nsapp/apps.py b/tests/apps/namespace_package_base/nsapp/apps.py
+index a81362e5b2..5a6a971be5 100644
+--- a/tests/apps/namespace_package_base/nsapp/apps.py
++++ b/tests/apps/namespace_package_base/nsapp/apps.py
+@@ -4,6 +4,9 @@ from django.apps import AppConfig
+ 
+ 
+ class NSAppConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default = False
+     name = 'nsapp'
+     path = os.path.dirname(__file__)
+diff --git a/tests/apps/one_config_app/apps.py b/tests/apps/one_config_app/apps.py
+index 8b44796e42..7a0826ab3b 100644
+--- a/tests/apps/one_config_app/apps.py
++++ b/tests/apps/one_config_app/apps.py
+@@ -2,4 +2,7 @@ from django.apps import AppConfig
+ 
+ 
+ class OneConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.one_config_app'
+diff --git a/tests/apps/two_configs_app/apps.py b/tests/apps/two_configs_app/apps.py
+index dd2eac9ad1..f5bdfe5189 100644
+--- a/tests/apps/two_configs_app/apps.py
++++ b/tests/apps/two_configs_app/apps.py
+@@ -2,8 +2,14 @@ from django.apps import AppConfig
+ 
+ 
+ class TwoConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.two_configs_app'
+ 
+ 
+ class TwoConfigBis(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.two_configs_app'
+diff --git a/tests/apps/two_configs_one_default_app/apps.py b/tests/apps/two_configs_one_default_app/apps.py
+index 489eb0f88f..985e6cc233 100644
+--- a/tests/apps/two_configs_one_default_app/apps.py
++++ b/tests/apps/two_configs_one_default_app/apps.py
+@@ -2,9 +2,15 @@ from django.apps import AppConfig
+ 
+ 
+ class TwoConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default = True
+     name = 'apps.two_configs_one_default_app'
+ 
+ 
+ class TwoConfigAlt(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'apps.two_configs_one_default_app'
+diff --git a/tests/apps/two_default_configs_app/apps.py b/tests/apps/two_default_configs_app/apps.py
+index 3cbcc411b0..77a5c809ba 100644
+--- a/tests/apps/two_default_configs_app/apps.py
++++ b/tests/apps/two_default_configs_app/apps.py
+@@ -2,10 +2,16 @@ from django.apps import AppConfig
+ 
+ 
+ class TwoConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default = True
+     name = 'apps.two_default_configs_app'
+ 
+ 
+ class TwoConfigBis(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     default = True
+     name = 'apps.two_default_configs_app'
+diff --git a/tests/check_framework/apps.py b/tests/check_framework/apps.py
+index c57994f722..f4ce231fbd 100644
+--- a/tests/check_framework/apps.py
++++ b/tests/check_framework/apps.py
+@@ -2,9 +2,15 @@ from django.apps import AppConfig
+ 
+ 
+ class CheckDefaultPKConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'check_framework'
+ 
+ 
+ class CheckPKConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'check_framework'
+     default_auto_field = 'django.db.models.BigAutoField'
+diff --git a/tests/db_functions/models.py b/tests/db_functions/models.py
+index 97584326aa..9dc0ed9559 100644
+--- a/tests/db_functions/models.py
++++ b/tests/db_functions/models.py
+@@ -30,6 +30,8 @@ class Fan(models.Model):
+ 
+ 
+ class DTModel(models.Model):
++    class Meta:
++        abstract = True
+     name = models.CharField(max_length=32)
+     start_datetime = models.DateTimeField(null=True, blank=True)
+     end_datetime = models.DateTimeField(null=True, blank=True)
+diff --git a/tests/i18n/loading_app/apps.py b/tests/i18n/loading_app/apps.py
+index 14cfdf776f..18432ec748 100644
+--- a/tests/i18n/loading_app/apps.py
++++ b/tests/i18n/loading_app/apps.py
+@@ -2,4 +2,7 @@ from django.apps import AppConfig
+ 
+ 
+ class LoadingAppConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'i18n.loading_app'
+diff --git a/tests/model_fields/models.py b/tests/model_fields/models.py
+index 9e8baeb565..329bbb7a11 100644
+--- a/tests/model_fields/models.py
++++ b/tests/model_fields/models.py
+@@ -343,6 +343,8 @@ class CustomJSONDecoder(json.JSONDecoder):
+ 
+ 
+ class JSONModel(models.Model):
++    class Meta:
++        abstract = True
+     value = models.JSONField()
+ 
+     class Meta:
+@@ -421,6 +423,8 @@ class ManyToMany(models.Model):
+ 
+ 
+ class UUIDModel(models.Model):
++    class Meta:
++        abstract = True
+     field = models.UUIDField()
+ 
+ 
+diff --git a/tests/model_options/apps.py b/tests/model_options/apps.py
+index be2250fe7a..fdea8c04f6 100644
+--- a/tests/model_options/apps.py
++++ b/tests/model_options/apps.py
+@@ -2,24 +2,39 @@ from django.apps import AppConfig
+ 
+ 
+ class ModelDefaultPKConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'model_options'
+ 
+ 
+ class ModelPKConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'model_options'
+     default_auto_field = 'django.db.models.SmallAutoField'
+ 
+ 
+ class ModelPKNonAutoConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'model_options'
+     default_auto_field = 'django.db.models.TextField'
+ 
+ 
+ class ModelPKNoneConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'model_options'
+     default_auto_field = None
+ 
+ 
+ class ModelPKNonexistentConfig(AppConfig):
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
++    default_auto_field = "django.db.models.BigAutoField"
+     name = 'model_options'
+     default_auto_field = 'django.db.models.NonexistentAutoField'

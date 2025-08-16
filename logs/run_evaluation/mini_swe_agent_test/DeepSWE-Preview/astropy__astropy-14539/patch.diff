@@ -1,0 +1,296 @@
+diff --git a/astropy/io/fits/diff.py b/astropy/io/fits/diff.py
+index 100cdf1b8c..2e3b1cd163 100644
+--- a/astropy/io/fits/diff.py
++++ b/astropy/io/fits/diff.py
+@@ -167,6 +167,16 @@ class _BaseDiff:
+             if os.path.exists(fileobj) and not overwrite:
+                 raise OSError(NOT_OVERWRITING_MSG.format(fileobj))
+             else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                 filepath = fileobj
+                 fileobj = open(filepath, "w")
+         elif fileobj is None:
+@@ -293,6 +303,16 @@ class FITSDiff(_BaseDiff):
+                 raise OSError(f"error opening file a ({a})") from exc
+             close_a = True
+         else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+             close_a = False
+ 
+         if isinstance(b, (str, os.PathLike)):
+@@ -302,6 +322,16 @@ class FITSDiff(_BaseDiff):
+                 raise OSError(f"error opening file b ({b})") from exc
+             close_b = True
+         else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+             close_b = False
+ 
+         # Normalize keywords/fields to ignore to upper case
+@@ -377,6 +407,16 @@ class FITSDiff(_BaseDiff):
+                         (idx, hdu_diff, self.a[idx].name, self.a[idx].ver)
+                     )
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     self.diff_hdus.append((idx, hdu_diff, "", self.a[idx].ver))
+ 
+     def _report(self):
+@@ -442,10 +482,30 @@ class FITSDiff(_BaseDiff):
+                 self._fileobj.write("\n")
+                 self._writeln("Primary HDU:")
+             else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                 self._fileobj.write("\n")
+                 if extname:
+                     self._writeln(f"Extension HDU {idx} ({extname}, {extver}):")
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     self._writeln(f"Extension HDU {idx}:")
+             hdu_diff.report(self._fileobj, indent=self._indent + 1)
+ 
+@@ -829,6 +889,16 @@ class HeaderDiff(_BaseDiff):
+             cardsa = [c for c in self.a.cards if str(c) != BLANK_CARD]
+             cardsb = [c for c in self.b.cards if str(c) != BLANK_CARD]
+         else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+             cardsa = list(self.a.cards)
+             cardsb = list(self.b.cards)
+ 
+@@ -897,6 +967,16 @@ class HeaderDiff(_BaseDiff):
+                 if diff_values(a, b, rtol=self.rtol, atol=self.atol):
+                     self.diff_keyword_values[keyword].append((a, b))
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     # If there are duplicate keywords we need to be able to
+                     # index each duplicate; if the values of a duplicate
+                     # are identical use None here
+@@ -921,6 +1001,16 @@ class HeaderDiff(_BaseDiff):
+                 if diff_values(a, b):
+                     self.diff_keyword_comments[keyword].append((a, b))
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     self.diff_keyword_comments[keyword].append(None)
+ 
+             if not any(self.diff_keyword_comments[keyword]):
+@@ -936,12 +1026,32 @@ class HeaderDiff(_BaseDiff):
+                 if keyword in Card._commentary_keywords:
+                     val = self.a[keyword][0]
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     val = self.a[keyword]
+                 self._writeln(f" Extra keyword {keyword!r:8} in a: {val!r}")
+             for keyword in self.diff_keywords[1]:
+                 if keyword in Card._commentary_keywords:
+                     val = self.b[keyword][0]
+                 else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                     val = self.b[keyword]
+                 self._writeln(f" Extra keyword {keyword!r:8} in b: {val!r}")
+ 
+@@ -1077,6 +1187,16 @@ class ImageDataDiff(_BaseDiff):
+             rtol = 0
+             atol = 0
+         else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+             rtol = self.rtol
+             atol = self.atol
+ 
+@@ -1091,6 +1211,16 @@ class ImageDataDiff(_BaseDiff):
+         if self.numdiffs < 0:
+             numdiffs = self.diff_total
+         else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+             numdiffs = self.numdiffs
+ 
+         self.diff_pixels = [
+@@ -1450,16 +1580,28 @@ class TableDataDiff(_BaseDiff):
+             ):
+                 diffs = where_not_allclose(arra, arrb, rtol=self.rtol, atol=self.atol)
+             elif "P" in col.format:
++                if len(arra[idx]) != len(arrb[idx]) or not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol):
++                if len(arra[idx]) != len(arrb[idx]) or not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol):
+                 diffs = (
+                     [
+                         idx
+                         for idx in range(len(arra))
+-                        if not np.allclose(
++                        if not arra_equal(
+                             arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol
+                         )
+                     ],
+                 )
+             else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                 diffs = np.where(arra != arrb)
+ 
+             self.diff_total += len(set(diffs[0]))
+@@ -1472,6 +1614,16 @@ class TableDataDiff(_BaseDiff):
+                 # Add no more diff'd values than this
+                 max_diffs = self.numdiffs - len(self.diff_values)
+             else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                 max_diffs = len(diffs[0])
+ 
+             last_seen_idx = None
+@@ -1567,6 +1719,16 @@ def report_diff_keyword_attr(fileobj, attr, diffs, keyword, ind=0):
+             if idx == 0:
+                 dup = ""
+             else:
++            if arra.dtype == object:
++                diffs = (
++                    [
++                        idx
++                        for idx in range(len(arra))
++                        if not np.allclose(arra[idx], arrb[idx], rtol=self.rtol, atol=self.atol)
++                    ],
++                )
++            else:
++                diffs = np.where(arra != arrb)
+                 dup = f"[{idx + 1}]"
+             fileobj.write(
+                 fixed_width_indent(
+diff --git a/pyproject.toml b/pyproject.toml
+index b4e9ef8387..ff68a7403d 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools",
++requires = ["setuptools==68.0.0",
+             "setuptools_scm>=6.2",
+             "wheel",
+             "cython==0.29.30",

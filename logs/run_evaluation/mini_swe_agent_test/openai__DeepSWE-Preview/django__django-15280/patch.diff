@@ -1,0 +1,36 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index fb6639793a..be656d3efb 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -842,6 +842,7 @@ class QuerySet:
+         return self.filter(pk=obj.pk).exists()
+ 
+     def _prefetch_related_objects(self):
++        self._merge_prefetch_deferred_fields()
+         # This method can only be called once the result cache has been filled.
+         prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+         self._prefetch_done = True
+@@ -1494,6 +1495,7 @@ class RawQuerySet:
+         return clone
+ 
+     def _prefetch_related_objects(self):
++        self._merge_prefetch_deferred_fields()
+         prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+         self._prefetch_done = True
+ 
+@@ -2050,3 +2052,15 @@ def get_related_populators(klass_info, select, db):
+         rel_cls = RelatedPopulator(rel_klass_info, select, db)
+         iterators.append(rel_cls)
+     return iterators
++
++    def _merge_prefetch_deferred_fields(self):
++        for instance, prefetched in self._prefetch_related_objects:
++            if hasattr(instance, '_state') and hasattr(prefetched, '_state'):
++                # Get the set of fields actually loaded in the prefetched instance
++                loaded_fields = set(
++                    field.name for field in prefetched._meta.concrete_fields
++                    if hasattr(prefetched, field.name)
++                )
++                # Remove these fields from the deferred set of the existing instance
++                instance._state.loaded_fields.update(loaded_fields)
++                instance._state.deferred_fields -= loaded_fields

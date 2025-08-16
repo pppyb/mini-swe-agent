@@ -1,0 +1,44 @@
+diff --git a/django/utils/dateformat.py b/django/utils/dateformat.py
+index afd36d79e0..49c8e9d095 100644
+--- a/django/utils/dateformat.py
++++ b/django/utils/dateformat.py
+@@ -326,7 +326,7 @@ class DateFormat(TimeFormat):
+ 
+     def y(self):
+         "Year, 2 digits; e.g. '99'"
+-        return str(self.data.year)[2:]
++        return f"{self.data.year % 100:02d}"
+ 
+     def Y(self):
+         "Year, 4 digits; e.g. '1999'"
+diff --git a/test_dateformat.py b/test_dateformat.py
+new file mode 100644
+index 0000000000..f0980db2ea
+--- /dev/null
++++ b/test_dateformat.py
+@@ -0,0 +1,15 @@
++import os
++import datetime
++os.environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
++from django.utils import dateformat
++
++test_cases = [
++    (datetime.datetime(99, 1, 1), "y", "99"),
++    (datetime.datetime(123, 4, 5), "y", "23"),
++    (datetime.datetime(999, 12, 31), "y", "99"),
++    (datetime.datetime(1000, 1, 1), "y", "00"),
++]
++
++for date, fmt, expected in test_cases:
++    result = dateformat.format(date, fmt)
++    print(f"Date: {date.year}, Formatted: {result}, Expected: {expected}, Pass: {result == expected}")
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..7fcd43144c
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,4 @@
++from django.conf import global_settings
++
++TIME_ZONE = 'UTC'
++USE_TZ = True

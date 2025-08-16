@@ -1,0 +1,67 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 844c01e95e..5a0e100ebc 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -402,6 +402,62 @@ class ModelState:
+ 
+ 
+ class Model(metaclass=ModelBase):
++    def __setattr__(self, name, value):
++        for cls in self.__class__.__mro__:
++            if hasattr(cls._meta, "pk") and name == cls._meta.pk.name:
++                self._state.adding = value is None
++                break
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        if any(name == cls._meta.pk.name for cls in self.__class__.__mro__ if hasattr(cls._meta, "pk")):
++            self._state.adding = value is None
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        for cls in self.__class__.__mro__:
++            if hasattr(cls._meta, "pk") and name == cls._meta.pk.name:
++                self._state.adding = value is None
++                break
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        for cls in self.__class__.__mro__:
++            if hasattr(cls._meta, "pk") and name == cls._meta.pk.name:
++                self._state.adding = value is None
++                break
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        if hasattr(self._meta, "pk") and name == self._meta.pk.name:
++            self._state.adding = value is None
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        any_pk_none = False
++        for cls in self.__class__.__mro__:
++            if hasattr(cls._meta, "pk") and name == cls._meta.pk.name:
++                if value is None:
++                    any_pk_none = True
++                else:
++                    any_pk_none = False
++                break
++        if any_pk_none:
++            self._state.adding = True
++        else:
++            self._state.adding = False
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        for cls in self.__class__.__mro__:
++            if hasattr(cls._meta, "pk") and name == cls._meta.pk.name:
++                if value is None:
++                    self._state.adding = True
++                else:
++                    self._state.adding = False
++                break
++        super().__setattr__(name, value)
++    def __setattr__(self, name, value):
++        if name == self._meta.pk.name:
++            if value is None:
++                self._state.adding = True
++            else:
++                self._state.adding = False
++        super().__setattr__(name, value)
+ 
+     def __init__(self, *args, **kwargs):
+         # Alias some things as locals to avoid repeat global lookups

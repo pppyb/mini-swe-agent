@@ -1,0 +1,76 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index 794e0faae7..7e6ade1fb2 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -427,6 +427,11 @@ class QuerySet:
+         """
+         obj = self.model(**kwargs)
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         obj.save(force_insert=True, using=self.db)
+         return obj
+ 
+@@ -466,6 +471,11 @@ class QuerySet:
+         if not objs:
+             return objs
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         connection = connections[self.db]
+         opts = self.model._meta
+         fields = opts.concrete_fields
+@@ -552,6 +562,11 @@ class QuerySet:
+         # The get() needs to be targeted at the write database in order
+         # to avoid potential transaction consistency problems.
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         try:
+             return self.get(**kwargs), False
+         except self.model.DoesNotExist:
+@@ -567,6 +582,11 @@ class QuerySet:
+         """
+         defaults = defaults or {}
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         with transaction.atomic(using=self.db):
+             try:
+                 obj = self.select_for_update().get(**kwargs)
+@@ -741,6 +761,11 @@ class QuerySet:
+         assert not self.query.is_sliced, \
+             "Cannot update a query once a slice has been taken."
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         query = self.query.chain(sql.UpdateQuery)
+         query.add_update_values(kwargs)
+         # Clear any annotations so that they won't be present in subqueries.
+@@ -1194,6 +1219,11 @@ class QuerySet:
+         the InsertQuery class and is how Model.save() is implemented.
+         """
+         self._for_write = True
++    max_batch_size = 1000
++    if batch_size is not None:
++        batch_size = min(batch_size, max_batch_size)
++    else:
++        batch_size = max_batch_size
+         if using is None:
+             using = self.db
+         query = sql.InsertQuery(self.model, ignore_conflicts=ignore_conflicts)

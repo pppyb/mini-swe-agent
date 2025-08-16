@@ -1,0 +1,199 @@
+diff --git a/django/db/models/fields/json.py b/django/db/models/fields/json.py
+index fafc1beee8..90cbe9e6eb 100644
+--- a/django/db/models/fields/json.py
++++ b/django/db/models/fields/json.py
+@@ -494,6 +494,149 @@ KeyTransform.register_lookup(KeyTransformLt)
+ KeyTransform.register_lookup(KeyTransformLte)
+ KeyTransform.register_lookup(KeyTransformGt)
+ KeyTransform.register_lookup(KeyTransformGte)
++class KeyTransformIn(KeyTransformNumericLookupMixin, lookups.In):
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++KeyTransform.register_lookup(KeyTransformIn)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sqlite(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++    pass
++KeyTransform.register_lookup(KeyTransformIn)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sqlite(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++    pass
++
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sql(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        if connection.vendor == "sqlite":
++            return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++        return super().as_sql(compiler, connection)
++    def as_sqlite(self, compiler, connection):
++        lhs, lhs_params = self.process_lhs(compiler, connection)
++        rhs, rhs_params = self.process_rhs(compiler, connection)
++        return f"JSON_EXTRACT({lhs}, $.{self.lhs.key_name}) IN ({rhs})", lhs_params + rhs_params
++    pass
++
++    pass
++    pass
++    pass
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++    pass
++
++
++	pass
++
++
++    pass
++    pass
+ 
+ 
+ class KeyTransformFactory:
+diff --git a/test_json_in_lookup.py b/test_json_in_lookup.py
+new file mode 100644
+index 0000000000..dee9414433
+--- /dev/null
++++ b/test_json_in_lookup.py
+@@ -0,0 +1,23 @@
++from django.db import models
++
++class OurModel(models.Model):
++    our_field = models.JSONField()
++
++# Test data: should return 312 items for both queries
++test_data = [{'our_field': {'key': 0}} for _ in range(312)]
++# Create and save test data to the database
++for data in test_data:
++    OurModel.objects.create(**data)
++    # Create and save test data to the database
++    for data in test_data:
++        OurModel.objects.create(**data)
++
++# Simulate the first filter with __in
++first_filter = {'our_field__key__in': [0]}
++first_items = OurModel.objects.filter(**first_filter)
++print(f"First query count: {len(first_items)}")
++
++# Simulate the second filter with exact match
++second_filter = {'our_field__key': 0}
++second_items = OurModel.objects.filter(**second_filter)
++print(f"Second query count: {len(second_items)}")
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..44ef1472eb
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,10 @@
++from django.conf import global_settings
++
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    }
++}
++
++INSTALLED_APPS = ['__main__']

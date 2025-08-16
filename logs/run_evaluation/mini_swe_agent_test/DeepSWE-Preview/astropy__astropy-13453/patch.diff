@@ -1,0 +1,26 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 7a3b85fc92..83f08ed124 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools",
++requires = ["setuptools==68.0.0",
+             "setuptools_scm>=6.2",
+             "wheel",
+             "cython==0.29.30",
+diff --git a/test_html_format.py b/test_html_format.py
+new file mode 100644
+index 0000000000..c6adab0072
+--- /dev/null
++++ b/test_html_format.py
+@@ -0,0 +1,9 @@
++from astropy.table import Table
++from io import StringIO
++
++t = Table([(1.23875234858e-24, 3.2348748432e-15), (2, 4)], names=('a', 'b'))
++tc = t.copy()
++
++with StringIO() as sp:
++    tc.write(sp, format="html", formats={"a": lambda x: f"{x:.2e}"})
++    print(sp.getvalue())

@@ -1,0 +1,31 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 3364d30740..02dddbe713 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools",
++requires = ["setuptools==68.0.0",
+             "setuptools_scm>=6.2",
+             "wheel",
+             "cython==0.29.22",
+diff --git a/test_separability.py b/test_separability.py
+new file mode 100644
+index 0000000000..2e5644fed3
+--- /dev/null
++++ b/test_separability.py
+@@ -0,0 +1,14 @@
++from astropy.modeling import models as m
++from astropy.modeling.separable import separability_matrix
++
++cm = m.Linear1D(10) & m.Linear1D(5)
++print("Separability matrix for cm:")
++print(separability_matrix(cm))
++
++complex_model = m.Pix2Sky_TAN() & m.Linear1D(10) & m.Linear1D(5)
++print("\nSeparability matrix for complex_model:")
++print(separability_matrix(complex_model))
++
++nested_model = m.Pix2Sky_TAN() & cm
++print("\nSeparability matrix for nested_model:")
++print(separability_matrix(nested_model))

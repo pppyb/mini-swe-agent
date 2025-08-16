@@ -1,0 +1,227 @@
+diff --git a/django/db/models/sql/compiler.py b/django/db/models/sql/compiler.py
+index a791908caf..61d65f9a40 100644
+--- a/django/db/models/sql/compiler.py
++++ b/django/db/models/sql/compiler.py
+@@ -116,6 +116,88 @@ class SQLCompiler:
+             for col in cols:
+                 expressions.append(col)
+         for expr, (sql, params, is_ref) in order_by:
++            if not is_ref and sql not in [s[0] for s in select]:
++                select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++                select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        in_select = any(sql == existing_sql for existing_sql, existing_params, existing_is_ref in select)
++        if not in_select:
++            select.append((sql, params, is_ref))
++        in_select = any(sql == existing_sql for existing_sql, existing_params, existing_is_ref in select)
++        if not in_select:
++            select.append((sql, params, is_ref))
+             # Skip References to the select clause, as all expressions in the
+             # select clause are already part of the group by.
+             if not expr.contains_aggregate and not is_ref:
+@@ -371,10 +453,86 @@ class SQLCompiler:
+         return result
+ 
+     def get_extra_select(self, order_by, select):
++    extra_select = []
++    extra_select = []
+         extra_select = []
+         if self.query.distinct and not self.query.distinct_fields:
+             select_sql = [t[1] for t in select]
+             for expr, (sql, params, is_ref) in order_by:
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++            if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if not is_ref and sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        if sql not in [s[0] for s in select]:
++            select.append((sql, params, is_ref))
++        in_select = any(sql == existing_sql for existing_sql, existing_params, existing_is_ref in select)
++        if not in_select:
++            select.append((sql, params, is_ref))
++        in_select = any(sql == existing_sql for existing_sql, existing_params, existing_is_ref in select)
++        if not in_select:
++            select.append((sql, params, is_ref))
+                 without_ordering = self.ordering_parts.search(sql).group(1)
+                 if not is_ref and (without_ordering, params) not in select_sql:
+                     extra_select.append((expr, (without_ordering, params), None))
+diff --git a/test_script.py b/test_script.py
+new file mode 100644
+index 0000000000..29b314aa75
+--- /dev/null
++++ b/test_script.py
+@@ -0,0 +1,41 @@
++import django
++from django.conf import settings
++from django.db import models, connection
++
++def main():
++    # Configure minimal Django settings
++    settings.configure(
++        DATABASES={
++            'default': {
++                'ENGINE': 'django.db.backends.sqlite3',
++                'NAME': ':memory:',
++            }
++        },
++        INSTALLED_APPS=['__main__'],
++    )
++    django.setup()
++
++    # Define model after settings are configured
++    class Dimension(models.Model):
++        id = models.AutoField(primary_key=True)
++        order = models.IntegerField()
++
++        class Meta:
++            app_label = 'test_app'
++
++    # Create tables
++    with connection.schema_editor() as schema_editor:
++        schema_editor.create_model(Dimension)
++
++    # Test the original issue
++    qs = (
++        Dimension.objects.filter(pk__in=[10, 11])
++        .union(Dimension.objects.filter(pk__in=[16, 17]).order_by('order'))
++    )
++
++    # This should no longer raise an error
++    print("First evaluation:", qs.order_by().values_list('pk', flat=True))
++    print("Second evaluation:", list(qs))
++
++if __name__ == "__main__":
++    main()

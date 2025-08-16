@@ -1,0 +1,86 @@
+diff --git a/django/contrib/gis/db/models/fields.py b/django/contrib/gis/db/models/fields.py
+index af5abb549e..4c99422d43 100644
+--- a/django/contrib/gis/db/models/fields.py
++++ b/django/contrib/gis/db/models/fields.py
+@@ -256,6 +256,11 @@ class GeometryField(BaseSpatialField):
+         setattr(cls, self.attname, SpatialProxy(self.geom_class or GEOSGeometry, self, load_func=GEOSGeometry))
+ 
+     def formfield(self, **kwargs):
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         defaults = {
+             'form_class': self.form_class,
+             'geom_type': self.geom_type,
+diff --git a/django/db/models/fields/related.py b/django/db/models/fields/related.py
+index 397146a354..6deebd4283 100644
+--- a/django/db/models/fields/related.py
++++ b/django/db/models/fields/related.py
+@@ -399,6 +399,11 @@ class RelatedField(FieldCacheMixin, Field):
+         return self.remote_field.limit_choices_to
+ 
+     def formfield(self, **kwargs):
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         """
+         Pass ``limit_choices_to`` to the field being constructed.
+ 
+@@ -407,6 +412,11 @@ class RelatedField(FieldCacheMixin, Field):
+         being constructed.
+         """
+         defaults = {}
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         if hasattr(self.remote_field, 'get_related_field'):
+             # If this is a callable, do not invoke it here. Just pass
+             # it in the defaults for when the form class will later be
+@@ -982,6 +992,11 @@ class ForeignKey(ForeignObject):
+             self.remote_field.field_name = cls._meta.pk.name
+ 
+     def formfield(self, *, using=None, **kwargs):
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         if isinstance(self.remote_field.model, str):
+             raise ValueError("Cannot create form field for %r yet, because "
+                              "its related model %r has not been loaded yet" %
+@@ -1055,6 +1070,11 @@ class OneToOneField(ForeignKey):
+         return name, path, args, kwargs
+ 
+     def formfield(self, **kwargs):
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         if self.remote_field.parent_link:
+             return None
+         return super().formfield(**kwargs)
+@@ -1670,7 +1690,17 @@ class ManyToManyField(RelatedField):
+         getattr(instance, self.attname).set(data)
+ 
+     def formfield(self, *, using=None, **kwargs):
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+         defaults = {
++        if self.limit_choices_to:
++            if isinstance(self.limit_choices_to, Q):
++                defaults["queryset"] = defaults["queryset"].filter(self.limit_choices_to).distinct()
++            else:
++                defaults["queryset"] = defaults["queryset"].filter(**self.limit_choices_to).distinct()
+             'form_class': forms.ModelMultipleChoiceField,
+             'queryset': self.remote_field.model._default_manager.using(using),
+             **kwargs,

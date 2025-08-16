@@ -1,0 +1,30 @@
+diff --git a/django/contrib/admin/options.py b/django/contrib/admin/options.py
+index 880a2cc17b..da75364d9b 100644
+--- a/django/contrib/admin/options.py
++++ b/django/contrib/admin/options.py
+@@ -1958,6 +1958,25 @@ class ModelAdmin(BaseModelAdmin):
+ 
+ 
+ class InlineModelAdmin(BaseModelAdmin):
++    def has_add_permission(self, request, obj=None):
++        if not super().has_add_permission(request, obj):
++            return False
++        opts = self.model._meta
++        user = request.user
++        view_perm = f"{opts.app_label}.view_{opts.model_name}"
++        if user.has_perm(view_perm) and not user.has_perm(f"{opts.app_label}.add_{opts.model_name}"):
++            return False
++        return True
++
++    def has_change_permission(self, request, obj=None):
++        if not super().has_change_permission(request, obj):
++            return False
++        opts = self.model._meta
++        user = request.user
++        view_perm = f"{opts.app_label}.view_{opts.model_name}"
++        if user.has_perm(view_perm) and not user.has_perm(f"{opts.app_label}.change_{opts.model_name}"):
++            return False
++        return True
+     """
+     Options for inline editing of ``model`` instances.
+ 

@@ -1,0 +1,31 @@
+diff --git a/django/contrib/contenttypes/fields.py b/django/contrib/contenttypes/fields.py
+index ed98ecb48c..446730c1c1 100644
+--- a/django/contrib/contenttypes/fields.py
++++ b/django/contrib/contenttypes/fields.py
+@@ -191,7 +191,7 @@ class GenericForeignKey(FieldCacheMixin):
+         for ct_id, fkeys in fk_dict.items():
+             instance = instance_dict[ct_id]
+             ct = self.get_content_type(id=ct_id, using=instance._state.db)
+-            ret_val.extend(ct.get_all_objects_for_this_type(pk__in=fkeys))
++            ret_val.extend(ct.get_all_objects_for_this_type($(related_model._meta.pk.get_attname())__in=fkeys))
+ 
+         # For doing the join in Python, we have to match both the FK val and the
+         # content type, so we use a callable that returns a (fk, class) pair.
+@@ -605,7 +605,7 @@ def create_generic_related_manager(superclass, rel):
+                     check_and_update_obj(obj)
+                     pks.append(obj.pk)
+ 
+-                self.model._base_manager.using(db).filter(pk__in=pks).update(**{
++                self.model._base_manager.using(db).filter($(related_model._meta.pk.get_attname())__in=pks).update(**{
+                     self.content_type_field_name: self.content_type,
+                     self.object_id_field_name: self.pk_val,
+                 })
+@@ -619,7 +619,7 @@ def create_generic_related_manager(superclass, rel):
+         def remove(self, *objs, bulk=True):
+             if not objs:
+                 return
+-            self._clear(self.filter(pk__in=[o.pk for o in objs]), bulk)
++            self._clear(self.filter($(related_model._meta.pk.get_attname())__in=[o.pk for o in objs]), bulk)
+         remove.alters_data = True
+ 
+         def clear(self, *, bulk=True):

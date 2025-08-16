@@ -1,0 +1,72 @@
+diff --git a/django/contrib/admin/utils.py b/django/contrib/admin/utils.py
+index e4ddc8f017..5eb22a945b 100644
+--- a/django/contrib/admin/utils.py
++++ b/django/contrib/admin/utils.py
+@@ -397,6 +397,43 @@ def display_for_field(value, field, empty_value_display):
+     elif isinstance(field, (models.IntegerField, models.FloatField)):
+         return formats.number_format(value)
+     elif isinstance(field, models.FileField) and value:
++    elif isinstance(field, models.JSONField):
++    elif isinstance(field, models.JSONField):
++        return field.prepare_value(value)
++    elif isinstance(field, models.JSONField):
++    elif isinstance(field, models.JSONField):
++        return field.prepare_value(value)
++    elif isinstance(field, models.JSONField):
++        return field.prepare_value(value)
++    elif isinstance(field, models.JSONField):
++        return field.prepare_value(value)
++    elif isinstance(field, models.JSONField):
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++        return field.prepare_value(value)
++    return field.prepare_value(value)
++        return field.prepare_value(value)
+         return format_html('<a href="{}">{}</a>', value.url, value)
+     else:
+         return display_for_value(value, empty_value_display)
+diff --git a/test_json_display.py b/test_json_display.py
+new file mode 100644
+index 0000000000..cafff9aef2
+--- /dev/null
++++ b/test_json_display.py
+@@ -0,0 +1,18 @@
++import django
++from django.conf import settings
++from django.db import models
++from django.contrib.admin.utils import display_for_field
++
++settings.configure(
++    INSTALLED_APPS=['django.contrib.admin', 'django.contrib.contenttypes'],
++    DATABASES={'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'}},
++)
++django.setup()
++
++class TestModel(models.Model):
++    json_field = models.JSONField()
++
++test_field = TestModel._meta.get_field('json_field')
++value = {'foo': 'bar'}
++result = display_for_field(value, test_field, empty_value_display='(empty)')
++print(repr(result))  # Should show properly formatted JSON string

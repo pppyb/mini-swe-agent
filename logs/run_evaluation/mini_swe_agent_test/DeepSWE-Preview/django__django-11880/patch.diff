@@ -1,0 +1,17 @@
+diff --git a/test_script.py b/test_script.py
+new file mode 100644
+index 0000000000..9609412d60
+--- /dev/null
++++ b/test_script.py
+@@ -0,0 +1,11 @@
++import copy
++from django.forms import Field
++
++field1 = Field()
++field1.error_messages = {'required': 'Original error'}
++
++field2 = copy.deepcopy(field1)
++field2.error_messages['required'] = 'Modified error'
++
++print("Field1 error:", field1.error_messages['required'])
++print("Field2 error:", field2.error_messages['required'])

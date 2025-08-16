@@ -1,0 +1,289 @@
+diff --git a/django/db/migrations/writer.py b/django/db/migrations/writer.py
+index 4918261fb0..a0a943371c 100644
+--- a/django/db/migrations/writer.py
++++ b/django/db/migrations/writer.py
+@@ -1,3 +1,4 @@
++from django.db.migrations.operations.models import AddField, AlterField
+ 
+ import os
+ import re
+@@ -138,6 +139,23 @@ class MigrationWriter:
+         # Deconstruct operations
+         operations = []
+         for operation in self.migration.operations:
++            if isinstance(operation, (AddField, AlterField)):
++                field = operation.field
++                if isinstance(field, models.ForeignKey):
++                    to_model = field.remote_field.model
++                    field_imports.add(to_model.__module__)
++            if isinstance(operation, (migrations.AddField, migrations.AlterField)):
++                field = operation.field
++                if isinstance(field, models.ForeignKey):
++                    to_model = field.remote_field.model
++                    field_imports.add(to_model.__module__)
++                if isinstance(field, models.ForeignKey):
++                    to_model = field.remote_field.model
++                    field_imports.add(to_model.__module__)
++                    to_app_label = field.remote_field.model._meta.app_label
++                    latest_migration = loader.get_latest_migration(to_app_label)
++                    if latest_migration:
++                        dependencies.add((to_app_label, latest_migration.name))
+             operation_string, operation_imports = OperationWriter(operation).serialize()
+             imports.update(operation_imports)
+             operations.append(operation_string)
+diff --git a/test_dependency_creation.py b/test_dependency_creation.py
+new file mode 100644
+index 0000000000..a23219d020
+--- /dev/null
++++ b/test_dependency_creation.py
+@@ -0,0 +1,59 @@
++import os
++import django
++from django.core.management import call_command
++from django.db import models
++from django.apps import apps
++
++os.environ["DJANGO_SETTINGS_MODULE"] = "test_settings"
++django.setup()
++
++# Create initial models with UUID field
++with open('testapp1/models.py', 'w') as f:
++    f.write('''from django.db import models
++import uuid
++
++class App1(models.Model):
++    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
++    text = models.CharField(max_length=100)
++    another_app = models.UUIDField(null=True, blank=True)
++''')
++with open('testapp2/models.py', 'w') as f:
++    f.write('''from django.db import models
++import uuid
++
++class App2(models.Model):
++    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
++    text = models.CharField(max_length=100)
++''')
++
++import testapp1.models
++import testapp2.models
++
++# Create initial migrations
++call_command('makemigrations', 'testapp1', 'testapp2', verbosity=0)
++
++# Modify model to use ForeignKey
++with open('testapp1/models.py', 'w') as f:
++    f.write('''from django.db import models
++import uuid
++
++class App1(models.Model):
++    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
++    text = models.CharField(max_length=100)
++    another_app = models.ForeignKey('testapp2.App2', null=True, blank=True, on_delete=models.SET_NULL)
++''')
++
++apps.clear_cache()
++import testapp1.models
++
++# Create migration with ForeignKey
++call_command('makemigrations', 'testapp1', verbosity=0)
++
++# Verify dependency exists
++from django.db.migrations.loader import MigrationLoader
++loader = MigrationLoader(None, ignore_no_migrations=True)
++migrations = [m for m in loader.graph.nodes if m[0] == "testapp1"]
++migration = loader.get_migration("testapp1", migrations[-1][1])
++dependencies = migration.dependencies
++assert any(dep[0] == 'testapp2' for dep in dependencies), "Dependency not found!"
++print("Test passed: Dependency correctly added")
+diff --git a/test_settings.py b/test_settings.py
+new file mode 100644
+index 0000000000..4e8199972a
+--- /dev/null
++++ b/test_settings.py
+@@ -0,0 +1,15 @@
++from django.conf.global_settings import INSTALLED_APPS as DEFAULT_APPS
++
++INSTALLED_APPS = DEFAULT_APPS + [
++    'testapp1',
++    'testapp2',
++]
++
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.sqlite3',
++        'NAME': ':memory:',
++    }
++}
++
++SECRET_KEY = 'test-secret-key'
+diff --git a/testapp1/__init__.py b/testapp1/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/testapp1/admin.py b/testapp1/admin.py
+new file mode 100644
+index 0000000000..8c38f3f3da
+--- /dev/null
++++ b/testapp1/admin.py
+@@ -0,0 +1,3 @@
++from django.contrib import admin
++
++# Register your models here.
+diff --git a/testapp1/apps.py b/testapp1/apps.py
+new file mode 100644
+index 0000000000..8295166dea
+--- /dev/null
++++ b/testapp1/apps.py
+@@ -0,0 +1,5 @@
++from django.apps import AppConfig
++
++
++class Testapp1Config(AppConfig):
++    name = 'testapp1'
+diff --git a/testapp1/migrations/0001_initial.py b/testapp1/migrations/0001_initial.py
+new file mode 100644
+index 0000000000..0ec9289441
+--- /dev/null
++++ b/testapp1/migrations/0001_initial.py
+@@ -0,0 +1,23 @@
++# Generated by Django 3.0 on 2025-08-15 06:50
++
++from django.db import migrations, models
++import uuid
++
++
++class Migration(migrations.Migration):
++
++    initial = True
++
++    dependencies = [
++    ]
++
++    operations = [
++        migrations.CreateModel(
++            name='App1',
++            fields=[
++                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
++                ('text', models.CharField(max_length=100)),
++                ('another_app', models.UUIDField(blank=True, null=True)),
++            ],
++        ),
++    ]
+diff --git a/testapp1/migrations/__init__.py b/testapp1/migrations/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/testapp1/models.py b/testapp1/models.py
+new file mode 100644
+index 0000000000..3858e669f5
+--- /dev/null
++++ b/testapp1/models.py
+@@ -0,0 +1,7 @@
++from django.db import models
++import uuid
++
++class App1(models.Model):
++    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
++    text = models.CharField(max_length=100)
++    another_app = models.ForeignKey('testapp2.App2', null=True, blank=True, on_delete=models.SET_NULL)
+diff --git a/testapp1/tests.py b/testapp1/tests.py
+new file mode 100644
+index 0000000000..7ce503c2dd
+--- /dev/null
++++ b/testapp1/tests.py
+@@ -0,0 +1,3 @@
++from django.test import TestCase
++
++# Create your tests here.
+diff --git a/testapp1/views.py b/testapp1/views.py
+new file mode 100644
+index 0000000000..91ea44a218
+--- /dev/null
++++ b/testapp1/views.py
+@@ -0,0 +1,3 @@
++from django.shortcuts import render
++
++# Create your views here.
+diff --git a/testapp2/__init__.py b/testapp2/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/testapp2/admin.py b/testapp2/admin.py
+new file mode 100644
+index 0000000000..8c38f3f3da
+--- /dev/null
++++ b/testapp2/admin.py
+@@ -0,0 +1,3 @@
++from django.contrib import admin
++
++# Register your models here.
+diff --git a/testapp2/apps.py b/testapp2/apps.py
+new file mode 100644
+index 0000000000..4cd8e6835d
+--- /dev/null
++++ b/testapp2/apps.py
+@@ -0,0 +1,5 @@
++from django.apps import AppConfig
++
++
++class Testapp2Config(AppConfig):
++    name = 'testapp2'
+diff --git a/testapp2/migrations/0001_initial.py b/testapp2/migrations/0001_initial.py
+new file mode 100644
+index 0000000000..43606a14dd
+--- /dev/null
++++ b/testapp2/migrations/0001_initial.py
+@@ -0,0 +1,22 @@
++# Generated by Django 3.0 on 2025-08-15 06:50
++
++from django.db import migrations, models
++import uuid
++
++
++class Migration(migrations.Migration):
++
++    initial = True
++
++    dependencies = [
++    ]
++
++    operations = [
++        migrations.CreateModel(
++            name='App2',
++            fields=[
++                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
++                ('text', models.CharField(max_length=100)),
++            ],
++        ),
++    ]
+diff --git a/testapp2/migrations/__init__.py b/testapp2/migrations/__init__.py
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/testapp2/models.py b/testapp2/models.py
+new file mode 100644
+index 0000000000..8f58f4ad48
+--- /dev/null
++++ b/testapp2/models.py
+@@ -0,0 +1,6 @@
++from django.db import models
++import uuid
++
++class App2(models.Model):
++    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
++    text = models.CharField(max_length=100)
+diff --git a/testapp2/tests.py b/testapp2/tests.py
+new file mode 100644
+index 0000000000..7ce503c2dd
+--- /dev/null
++++ b/testapp2/tests.py
+@@ -0,0 +1,3 @@
++from django.test import TestCase
++
++# Create your tests here.
+diff --git a/testapp2/views.py b/testapp2/views.py
+new file mode 100644
+index 0000000000..91ea44a218
+--- /dev/null
++++ b/testapp2/views.py
+@@ -0,0 +1,3 @@
++from django.shortcuts import render
++
++# Create your views here.

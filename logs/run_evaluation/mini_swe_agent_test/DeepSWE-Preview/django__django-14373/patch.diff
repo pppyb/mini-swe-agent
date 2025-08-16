@@ -1,0 +1,38 @@
+diff --git a/django/utils/dateformat.py b/django/utils/dateformat.py
+index 38e89c47bb..ba60fdc506 100644
+--- a/django/utils/dateformat.py
++++ b/django/utils/dateformat.py
+@@ -314,7 +314,7 @@ class DateFormat(TimeFormat):
+ 
+     def Y(self):
+         "Year, 4 digits; e.g. '1999'"
+-        return self.data.year
++        return f"{self.data.year:04d}"
+ 
+     def z(self):
+         """Day of the year, i.e. 1 to 366."""
+diff --git a/settings.py b/settings.py
+new file mode 100644
+index 0000000000..04251e654a
+--- /dev/null
++++ b/settings.py
+@@ -0,0 +1,2 @@
++from django.conf import settings
++settings.configure(TIME_ZONE='UTC')
+diff --git a/test_dateformat.py b/test_dateformat.py
+new file mode 100644
+index 0000000000..7a887494e8
+--- /dev/null
++++ b/test_dateformat.py
+@@ -0,0 +1,11 @@
++import os
++os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
++import django
++django.setup()
++
++import datetime
++from django.utils.dateformat import DateFormat
++
++date = datetime.datetime(123, 1, 1)
++df = DateFormat(date)
++print(df.format('Y'))  # Expected output: '0123'

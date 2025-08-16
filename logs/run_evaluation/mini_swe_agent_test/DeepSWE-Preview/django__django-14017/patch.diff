@@ -1,0 +1,86 @@
+diff --git a/django/db/models/expressions.py b/django/db/models/expressions.py
+index ffc3a7fda5..3880fe08b5 100644
+--- a/django/db/models/expressions.py
++++ b/django/db/models/expressions.py
+@@ -1148,6 +1148,52 @@ class Subquery(Expression):
+ 
+ 
+ class Exists(Subquery):
++    def __rand__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__rand__(other)
++    def __rand__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__rand__(other)
++    def __rand__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__rand__(other)
++    def __rand__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__rand__(other)
++    def __and__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__and__(other)
++
++    def __rand__(self, other):
++        if isinstance(other, Q):
++            combined = other.copy()
++            combined.add(self, Q.AND)
++            return combined
++        return super().__rand__(other)
++    def __and__(self, other):
++        if isinstance(other, Q):
++            return Q(other) & Q(self)
++        return super().__and__(other)
++
++    def __rand__(self, other):
++        return self.__and__(other)
++    def __rand__(self, other):
++        return self.__and__(other)
+     template = 'EXISTS(%(subquery)s)'
+     output_field = fields.BooleanField()
+ 
+diff --git a/django/db/models/query_utils.py b/django/db/models/query_utils.py
+index c957ffa564..73d3b49607 100644
+--- a/django/db/models/query_utils.py
++++ b/django/db/models/query_utils.py
+@@ -62,6 +62,8 @@ class Q(tree.Node):
+         return self._combine(other, self.OR)
+ 
+     def __and__(self, other):
++        if not isinstance(other, Q):
++            return NotImplemented
+         return self._combine(other, self.AND)
+ 
+     def __invert__(self):
+diff --git a/test_exists_and_q.py b/test_exists_and_q.py
+new file mode 100644
+index 0000000000..133a4c0e3c
+--- /dev/null
++++ b/test_exists_and_q.py
+@@ -0,0 +1,10 @@
++from django.db.models import Q, Exists
++
++# Create a dummy queryset (using an empty list as a placeholder)
++# Assuming a model exists, but actual model isn't needed for this test
++exists_expr = Exists([])  # Simplified for testing
++q_expr = Q()
++
++# Test the operation
++result = q_expr & exists_expr
++print("Result of Q() & Exists(...):", result)

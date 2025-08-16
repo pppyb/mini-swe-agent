@@ -1,0 +1,28 @@
+diff --git a/django/core/management/base.py b/django/core/management/base.py
+index 0c3a981290..02993d66c4 100644
+--- a/django/core/management/base.py
++++ b/django/core/management/base.py
+@@ -290,6 +290,7 @@ class BaseCommand:
+         return parser
+ 
+     def add_arguments(self, parser):
++    parser.add_argument("--skip-checks", action="store_true", help="Skip system checks.")
+         """
+         Entry point for subclassed commands to add custom arguments.
+         """
+@@ -489,6 +490,7 @@ class AppCommand(BaseCommand):
+     missing_args_message = "Enter at least one application label."
+ 
+     def add_arguments(self, parser):
++    parser.add_argument("--skip-checks", action="store_true", help="Skip system checks.")
+         parser.add_argument('args', metavar='app_label', nargs='+', help='One or more application label.')
+ 
+     def handle(self, *app_labels, **options):
+@@ -530,6 +532,7 @@ class LabelCommand(BaseCommand):
+     missing_args_message = "Enter at least one %s." % label
+ 
+     def add_arguments(self, parser):
++    parser.add_argument("--skip-checks", action="store_true", help="Skip system checks.")
+         parser.add_argument('args', metavar=self.label, nargs='+')
+ 
+     def handle(self, *labels, **options):

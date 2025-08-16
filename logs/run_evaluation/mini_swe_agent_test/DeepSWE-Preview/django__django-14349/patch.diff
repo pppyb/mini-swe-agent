@@ -1,0 +1,33 @@
+diff --git a/django/core/validators.py b/django/core/validators.py
+index a385819510..0343ef9a74 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -100,6 +100,23 @@ class URLValidator(RegexValidator):
+ 
+     def __call__(self, value):
+         if not isinstance(value, str):
++    if any(c in "
++
+	" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
++    if any(c in "\
++\
+\	" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
++    if any(c in "\\n\\r\\t" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
++    if any(c in "\
++\
+\	" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
++    if any(c in "
++
+	" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
++    if any(c in "
++
+	" for c in value):
++        raise ValidationError(self.message, code=self.code, params={"value": value})
+             raise ValidationError(self.message, code=self.code, params={'value': value})
+         # Check if the scheme is valid.
+         scheme = value.split('://')[0].lower()

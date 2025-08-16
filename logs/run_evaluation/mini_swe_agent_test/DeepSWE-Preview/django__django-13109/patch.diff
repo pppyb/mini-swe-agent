@@ -1,0 +1,98 @@
+diff --git a/django/db/models/fields/related.py b/django/db/models/fields/related.py
+index d517d7269b..c2aea9c730 100644
+--- a/django/db/models/fields/related.py
++++ b/django/db/models/fields/related.py
+@@ -914,7 +914,7 @@ class ForeignKey(ForeignObject):
+             return
+ 
+         using = router.db_for_read(self.remote_field.model, instance=model_instance)
+-        qs = self.remote_field.model._default_manager.using(using).filter(
++        qs = self.remote_field.model._base_manager.using(using).filter(
+             **{self.remote_field.field_name: value}
+         )
+         qs = qs.complex_filter(self.get_limit_choices_to())
+diff --git a/test_fk_validation.py b/test_fk_validation.py
+new file mode 100644
+index 0000000000..eef6b4e381
+--- /dev/null
++++ b/test_fk_validation.py
+@@ -0,0 +1,79 @@
++import django
++from django.conf import settings
++from django.apps import AppConfig, apps
++from django.test import TestCase
++from django.test.runner import DiscoverRunner
++from django import forms
++from django.db import models
++
++class MainAppConfig(AppConfig):
++    name = "__main__"
++
++    def ready(self):
++        # Define models here
++        class ArticleManager(models.Manager):
++            def get_queryset(self):
++                qs = super().get_queryset()
++                return qs.filter(archived=False)
++
++        class Article(models.Model):
++            title = models.CharField(max_length=100)
++            archived = models.BooleanField(default=False)
++            objects = ArticleManager()
++
++            class Meta:
++                app_label = "__main__"
++
++        class FavoriteArticles(models.Model):
++            article = models.ForeignKey(Article, on_delete=models.CASCADE)
++
++            class Meta:
++                app_label = "__main__"
++
++        # Register models with the app
++        apps.register_model(self.label, Article)
++        apps.register_model(self.label, FavoriteArticles)
++
++        # Add models to the module's namespace
++        module = sys.modules[self.name]
++        module.Article = Article
++        module.FavoriteArticles = FavoriteArticles
++
++import sys
++
++settings.configure(
++    DATABASES={
++        "default": {
++            "ENGINE": "django.db.backends.sqlite3",
++            "NAME": ":memory:",
++        }
++    },
++    INSTALLED_APPS=["__main__.MainAppConfig"],
++    SECRET_KEY="test_key",
++    DEBUG=True,
++)
++
++django.setup()
++
++class FavoriteArticlesForm(forms.ModelForm):
++    class Meta:
++        model = FavoriteArticles
++        fields = '__all__'
++
++    def __init__(self, *args, **kwargs):
++        super().__init__(*args, **kwargs)
++        self.fields['article'].queryset = Article._base_manager.all()
++
++class TestForeignKeyValidation(TestCase):
++    def test_archived_article_validation(self):
++        archived_article = Article.objects.create(title="Archived", archived=True)
++        form = FavoriteArticlesForm({'article': archived_article.id})
++        self.assertTrue(form.is_valid(), "Form should be valid with archived article")
++        favorite = form.save()
++        self.assertEqual(favorite.article, archived_article)
++
++if __name__ == '__main__':
++    test_runner = DiscoverRunner()
++    failures = test_runner.run_tests(['__main__'])
++    if failures:
++        exit(1)

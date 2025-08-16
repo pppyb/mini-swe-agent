@@ -1,0 +1,29 @@
+diff --git a/django/core/validators.py b/django/core/validators.py
+index 92394a7eae..e11a6aadaa 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -94,7 +94,7 @@ class URLValidator(RegexValidator):
+ 
+     regex = _lazy_re_compile(
+         r'^(?:[a-z0-9\.\-\+]*)://'  # scheme is validated separately
+-        r'(?:\S+(?::\S*)?@)?'  # user:pass authentication
++        r"(?:([^:@/]+)(?::([^:@/]*))?@)?"  # user:pass authentication
+         r'(?:' + ipv4_re + '|' + ipv6_re + '|' + host_re + ')'
+         r'(?::\d{2,5})?'  # port
+         r'(?:[/?#][^\s]*)?'  # resource path
+diff --git a/test_validator.py b/test_validator.py
+new file mode 100644
+index 0000000000..a446008632
+--- /dev/null
++++ b/test_validator.py
+@@ -0,0 +1,10 @@
++from django.core.validators import URLValidator
++from django.core.exceptions import ValidationError
++
++validator = URLValidator()
++
++try:
++    validator('http://foo/bar@example.com')
++    print("URL is valid (should be invalid)")
++except ValidationError:
++    print("URL is invalid (correct)")

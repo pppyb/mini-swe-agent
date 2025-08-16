@@ -1,0 +1,24 @@
+diff --git a/django/db/models/functions/datetime.py b/django/db/models/functions/datetime.py
+index b6594b043b..11922ca635 100644
+--- a/django/db/models/functions/datetime.py
++++ b/django/db/models/functions/datetime.py
+@@ -285,6 +285,9 @@ class TruncDay(TruncBase):
+ 
+ 
+ class TruncDate(TruncBase):
++    def __init__(self, expression, output_field=None, tzinfo=None):
++        super().__init__(expression, output_field=output_field)
++        self.tzinfo = tzinfo
+     kind = 'date'
+     lookup_name = 'date'
+     output_field = DateField()
+@@ -298,6 +301,9 @@ class TruncDate(TruncBase):
+ 
+ 
+ class TruncTime(TruncBase):
++    def __init__(self, expression, output_field=None, tzinfo=None):
++        super().__init__(expression, output_field=output_field)
++        self.tzinfo = tzinfo
+     kind = 'time'
+     lookup_name = 'time'
+     output_field = TimeField()

@@ -1,0 +1,52 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index 387deca527..2838d91622 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -496,7 +496,12 @@ class QuerySet:
+         fields = opts.concrete_fields
+         objs = list(objs)
+         self._prepare_for_bulk_create(objs)
++        total_updated = 0
+         with transaction.atomic(using=self.db, savepoint=False):
++        return total_updated
++        total_updated = 0
++        return total_updated
++    return total_updated
+             objs_with_pk, objs_without_pk = partition(lambda o: o.pk is None, objs)
+             if objs_with_pk:
+                 returned_columns = self._batched_insert(
+@@ -563,7 +568,13 @@ class QuerySet:
+                     case_statement = Cast(case_statement, output_field=field)
+                 update_kwargs[field.attname] = case_statement
+             updates.append(([obj.pk for obj in batch_objs], update_kwargs))
++    total_updated = 0
++        total_updated = 0
+         with transaction.atomic(using=self.db, savepoint=False):
++        return total_updated
++        total_updated = 0
++        return total_updated
++    return total_updated
+             for pks, update_kwargs in updates:
+                 self.filter(pk__in=pks).update(**update_kwargs)
+     bulk_update.alters_data = True
+@@ -584,6 +595,7 @@ class QuerySet:
+             # Try to create an object using passed params.
+             try:
+                 with transaction.atomic(using=self.db):
++    return total_updated
+                     params = dict(resolve_callables(params))
+                     return self.create(**params), True
+             except IntegrityError:
+@@ -602,7 +614,12 @@ class QuerySet:
+         """
+         defaults = defaults or {}
+         self._for_write = True
++        total_updated = 0
+         with transaction.atomic(using=self.db):
++        return total_updated
++        total_updated = 0
++        return total_updated
++    return total_updated
+             # Lock the row so that a concurrent update is blocked until
+             # update_or_create() has performed its save.
+             obj, created = self.select_for_update().get_or_create(defaults, **kwargs)

@@ -1,0 +1,60 @@
+diff --git a/check_test.py b/check_test.py
+new file mode 100644
+index 0000000000..a9ee5652bf
+--- /dev/null
++++ b/check_test.py
+@@ -0,0 +1,21 @@
++import django
++from django.conf import settings
++from django.core.management import call_command
++
++settings.configure(
++    INSTALLED_APPS=[
++        "django.contrib.contenttypes",
++        "tests",
++    ],
++    DATABASES={
++        'default': {
++            'ENGINE': 'django.db.backends.sqlite3',
++            'NAME': ':memory:',
++        }
++    }
++)
++django.setup()
++
++from test_model import TestModel
++
++call_command('check', 'tests')
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 3ce711f3f1..639bb5e657 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -1708,7 +1708,9 @@ class Model(metaclass=ModelBase):
+             fld = None
+             for part in field.split(LOOKUP_SEP):
+                 try:
+-                    fld = _cls._meta.get_field(part)
++                    if part == "pk":
++                        fld = _cls._meta.pk
++                        fld = _cls._meta.pk
+                     if fld.is_relation:
+                         _cls = fld.get_path_info()[-1].to_opts.model
+                 except (FieldDoesNotExist, AttributeError):
+diff --git a/test_model.py b/test_model.py
+new file mode 100644
+index 0000000000..5686ec656f
+--- /dev/null
++++ b/test_model.py
+@@ -0,0 +1,12 @@
++from django.db import models
++
++class RelatedModel(models.Model):
++    class Meta:
++        app_label = "tests"
++
++class TestModel(models.Model):
++    related_field = models.ForeignKey(RelatedModel, on_delete=models.CASCADE)
++
++    class Meta:
++        app_label = "tests"
++        ordering = ['related_field__pk']

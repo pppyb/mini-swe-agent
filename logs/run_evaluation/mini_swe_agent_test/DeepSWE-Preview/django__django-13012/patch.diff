@@ -1,0 +1,22 @@
+diff --git a/django/db/models/expressions.py b/django/db/models/expressions.py
+index c1a76584f0..f9553d6d98 100644
+--- a/django/db/models/expressions.py
++++ b/django/db/models/expressions.py
+@@ -664,6 +664,8 @@ class Func(SQLiteNumericMixin, Expression):
+ 
+ 
+ class Value(Expression):
++    def is_constant(self):
++        return True
+     """Represent a wrapped value as a node within an expression."""
+     def __init__(self, value, output_field=None):
+         """
+@@ -848,6 +850,8 @@ class ExpressionList(Func):
+ 
+ 
+ class ExpressionWrapper(Expression):
++    def is_constant(self):
++        return self.expression.is_constant()
+     """
+     An expression that can wrap another expression so that it can provide
+     extra context to the inner expression, such as the output_field.

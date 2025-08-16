@@ -1,0 +1,10 @@
+diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py
+index ae82d26340..d655cecd3a 100644
+--- a/django/db/models/deletion.py
++++ b/django/db/models/deletion.py
+@@ -1,4 +1,4 @@
+-from collections import Counter
++from collections import Counter, defaultdict
+ from itertools import chain
+ from operator import attrgetter
+ 
